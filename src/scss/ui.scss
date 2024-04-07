@@ -7,7 +7,7 @@ html {
     box-sizing: border-box;
 
     font-size: $font-size;
-    font-family: $font-family;
+    font-family: Calibri, $font-family;
 }
 body {
     margin: 0;
@@ -19,13 +19,28 @@ body {
     // --color-secondary: ${$color-secondary};
     // --color-tertiary: ${$color-tertiary};
 }
+* {
+}
+
+.font_BAHNSCHRIFT
+{
+    font-family: 'Bahnschrift', Arial, Helvetica, sans-serif, sans-serif;
+}
+.font_INKFREE
+{
+    font-family: 'Ink Free', Arial, Helvetica, sans-serif, sans-serif;
+}
+.font_MONTSERRAT
+{
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif, sans-serif;
+}
 
 @media screen and (min-width: 768px) {
     .app {
         display: flex;
         flex-direction: column;
-        // width: 100vw;
-        // height: 100vh;
+        width: 100vw;
+        height: 100vh;
 
         & .header {
             display: flex;
@@ -33,6 +48,17 @@ body {
             background: $gradient-primary;
             color: $text-color-light;
             height: $header-height;
+
+            & .title {
+                display: flex;
+                justify-content: left;
+                align-items: center;
+                flex: 1;
+                padding-inline: 1rem;
+                & .text {
+                    font-size: 2.5rem;
+                }
+            }
         }
         & .content {
             display: flex;
@@ -52,10 +78,54 @@ body {
 
     .panel {
         display: flex;
+        flex-direction: column;
 
-        & .__idependent {
+        padding: $global-padding;
+        background-color: $panel-color;
+        border-radius: $border-radius;
+        box-shadow: 2px 2px 10px 0px $border-color;
+        backdrop-filter: blur(5px);
+
+        & .panel-header{
+            border-bottom: 1px solid $border-color;
+            margin: -$global-padding;
+            padding: $global-padding;
+            margin-bottom: $global-padding;
+            background-color: $panel-color-2;
+            border-radius: $border-radius $border-radius 0px 0px;
+        }
+
+        & .panel-buttons{
+            padding: $global-padding;
+            margin: -$global-padding;
+            margin-top: $global-padding;
+            background-color: $panel-color-3;
+            border-radius: 0px 0px $border-radius $border-radius;
+            border-top: 1px solid $panel-color-2;
+
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        &.__idependent {
             display: static;
         }
     }
     
+}
+
+
+
+// LOOPS
+
+@for $i from 1 to 9 {
+    .fw-#{$i} {
+        font-weight: $i * 100;
+    }
+}
+
+@for $i from 1 to 9 {
+    .fs-#{$i} {
+        font-size: $i * 0.5rem;
+    }
 }

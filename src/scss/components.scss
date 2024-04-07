@@ -1,0 +1,92 @@
+@import './vars.scss';
+
+
+input,
+[type="text"],
+[type="password"] {
+    width: auto;
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+    border: unset;
+    background-color: unset;
+    border-bottom: 1px solid $panel-color-dark;
+
+    &.ng-invalid.ng-touched:not(.ng-untouched) {
+        border-color: red;
+        color: red;
+    }
+
+    &:active,
+    &:focus,
+    &:hover,
+    &:visited,
+    &:link,
+    &:target,
+    &:focus-visible,
+    &:focus-within {
+        outline: unset;
+        border: unset;
+    }
+
+    &:hover,
+    &:active,
+    &:focus,
+    &:hover,
+    &:visited,
+    &:link,
+    &:target,
+    &:focus-visible,
+    &:focus-within {
+        border-bottom: 1px solid $color-tertiary;
+        //background: linear-gradient(0deg, $color-tertiary 5%, transparent 5%);
+    }
+}
+
+button {
+    /* unset all */
+    padding: unset;
+    margin: unset;
+    border: unset;
+    background: unset;
+    cursor: pointer;
+
+}
+
+button.button-glass {
+    background: rgba(255, 255, 255, 0);
+    border-radius: $border-radius;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(2.7px);
+    -webkit-backdrop-filter: blur(2.7px);
+    border: 1px solid rgba(255, 255, 255, 0.87);
+    cursor: pointer;
+
+    &:hover {
+        background: linear-gradient(0deg, #27f1ff1e 20%, transparent 90%);
+        border-radius: $border-radius;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(2.7px);
+        -webkit-backdrop-filter: blur(2.7px);
+        border: 1px solid rgba(255, 255, 255, 0.87);
+    }
+}
+
+button.button-flat {
+    padding: $global-padding;
+    background-color: $text-color-light;
+    color: $color-tertiary;
+    border-radius: $border-radius;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+    cursor: pointer;
+    min-height: 48px;
+    min-width: 64px;
+
+    &:hover {
+        background-color: $panel-color-2;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    }
+}
