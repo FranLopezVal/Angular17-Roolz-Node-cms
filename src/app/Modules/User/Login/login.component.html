@@ -1,3 +1,6 @@
-<div>
-    tst
-</div>
+<ui-panel #panel_ [titlePanel]="'You´re Welcome!'">
+   <form [formGroup]="Login">
+    <input type="text" formControlName="email" placeholder="Email">
+    <input type="password" formControlName="password" placeholder="Password">
+   </form>
+</ui-panel>
