@@ -1,0 +1,19 @@
+@import './vars.scss';
+
+.gap {
+    gap: $gap;
+}
+
+.flex-right {
+    justify-self: right;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}

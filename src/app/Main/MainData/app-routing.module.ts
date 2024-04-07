@@ -5,7 +5,7 @@ const routes: Routes = [
   // { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
   { 
     path: 'user', 
-    loadChildren: () => import('./Modules/User/user.module').then(m => m.UserModule) 
+    loadChildren: () => import('../../Modules/User/user.module').then(m => m.UserModule) 
     // authGuard: [AuthGuard]
   },
   // { path: 'faq', loadChildren: () => import('./faq/faq.module').then(m => m.FaqModule) },

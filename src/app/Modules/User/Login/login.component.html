@@ -1,6 +1,23 @@
 <ui-panel #panel_ [titlePanel]="'You´re Welcome!'">
-   <form [formGroup]="Login">
-    <input type="text" formControlName="email" placeholder="Email">
-    <input type="password" formControlName="password" placeholder="Password">
+   <form [formGroup]="Login" class="flex-column gap">
+      <input class="fs-2" type="text" formControlName="user" placeholder="User">
+      <input class="fs-2" type="password" formControlName="password" placeholder="Password">
+      <p style="margin:unset">
+         If you don't have an account, please <a href="/register">register</a>
+      </p>
+      <div>
+      <p style="margin-top: unset;"> Or login with:</p>
+         <ui-button-glass>
+            <img src="assets/icons/media/icons8-google.svg" alt="Google" width="48" height="48">
+         </ui-button-glass>
+      </div>
+      <div class="panel-buttons">
+         <ui-button-flat>
+            <span>Login</span>
+            <span class="material-symbols-outlined">
+               login
+            </span> 
+         </ui-button-flat>
+      </div>
    </form>
 </ui-panel>

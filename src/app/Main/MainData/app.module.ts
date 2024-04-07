@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { headerComponent } from './Modules/Global/Header/header.component';
-import { SharedModule } from './Shared/shared.module';
+import { AppComponent } from '../MainComponent/app.component';
+import { headerComponent } from '../../Modules/Global/Header/header.component';
+import { SharedModule } from '../../Shared/shared.module';
 
 @NgModule({
   declarations: [

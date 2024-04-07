@@ -1,15 +1,39 @@
 $color-main: #ff4800;
 $color-secondary: #d10050;
-$color-tertiary: #27f1ff;
+$color-tertiary: #003655;
 
 $text-color: #333;
 $text-color-light: #fff;
 
-$font-family: 'Roboto', sans-serif;
+$panel-color: #f4f4f4;
+$panel-color-dark: #333;
+$panel-color-2: #eaeaea;
+$panel-color-3: #f9f9f9;
+
+$border-color: #a8a8a8;
+
+$font-family: 'Montserrat',
+Arial,
+Helvetica,
+sans-serif,
+sans-serif;
 $font-size: 12px;
 
 $gradient-primary: linear-gradient(90deg, $color-main, $color-secondary);
 
 
+/* GLOBAL VARS */
+$gap: 8px;
+
 /* HEADER VARS */
 $header-height: 60px;
+
+
+/* PADDINGS */
+$padding-1rem: 1rem;
+$global-padding: 8px;
+$global-padding-2x: 16px;
+
+/* BORDERS */
+$border-radius: 4px;
+// $border($color): 1px solid $color;
