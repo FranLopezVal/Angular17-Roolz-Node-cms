@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class headerComponent {
 
-    readonly TitleApp = 'Roolz CMS'
+    readonly TitleApp = 'Roolz Cms'
 
     constructor() {
     }

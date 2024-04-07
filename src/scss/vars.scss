@@ -1,3 +1,19 @@
+@font-face {
+    font-family: 'Louis';
+    src: url('../assets/fonts/Louis\ George\ Cafe.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Adorable';
+    src: url('../assets/fonts/Adorable\ Handmade.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+
+
 $color-main: #ff4800;
 $color-secondary: #d10050;
 $color-tertiary: #003655;
@@ -10,14 +26,12 @@ $panel-color-dark: #333;
 $panel-color-2: #eaeaea;
 $panel-color-3: #f9f9f9;
 
+$body-lite-gradient: linear-gradient(0deg, $panel-color, #ff480015);
+
 $border-color: #a8a8a8;
 
-$font-family: 'Montserrat',
-Arial,
-Helvetica,
-sans-serif,
-sans-serif;
-$font-size: 12px;
+$font-family: 'Louis', Calibri, Arial, Helvetica, sans-serif;
+$font-size: 14px;
 
 $gradient-primary: linear-gradient(90deg, $color-main, $color-secondary);
 
@@ -31,6 +45,7 @@ $header-height: 60px;
 
 /* PADDINGS */
 $padding-1rem: 1rem;
+
 $global-padding: 8px;
 $global-padding-2x: 16px;
 
