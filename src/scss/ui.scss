@@ -1,0 +1,61 @@
+@import './vars.scss';
+
+
+html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    font-size: $font-size;
+    font-family: $font-family;
+}
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root {
+    // --color-primary: ${$color-main};
+    // --color-secondary: ${$color-secondary};
+    // --color-tertiary: ${$color-tertiary};
+}
+
+@media screen and (min-width: 768px) {
+    .app {
+        display: flex;
+        flex-direction: column;
+        // width: 100vw;
+        // height: 100vh;
+
+        & .header {
+            display: flex;
+            justify-content: space-between;
+            background: $gradient-primary;
+            color: $text-color-light;
+            height: $header-height;
+        }
+        & .content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+        }
+        & .footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: $gradient-primary;
+            color: $text-color-light;
+            height: 30px;
+        }
+    }
+
+    .panel {
+        display: flex;
+
+        & .__idependent {
+            display: static;
+        }
+    }
+    
+}
