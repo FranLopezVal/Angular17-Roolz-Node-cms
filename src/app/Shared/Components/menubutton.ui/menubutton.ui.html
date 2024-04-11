@@ -1,0 +1,26 @@
+<button class="button-menu" (click)="onClick()">
+    <ng-content></ng-content>
+</button>
+<!-- @if (BackfaceOpen)
+{
+} -->
+
+@if (MenuOpen)
+{
+    <div class="backface" (focus)="onBlur()" (click)="onBlur()">
+    </div>  
+
+    <div #container class="menu-container" 
+    [style.margin-left.px]="OffsetView"
+    [style.margin-top.px]="2"
+    [style.border]="ShowBorder ? '1px solid #000':'none'"
+    [style.position]="_isChild===true ? 'relative !important':''">
+        @for (btn of MenuContent; track btn.id)
+        {
+            <ui-menubutton [_isChild]="true" (click)="onClick()"
+            [_menuList]="btn.child" [currentMenu]="btn">
+               <span style="margin-inline: 8px;">{{ btn.text }}</span> 
+            </ui-menubutton>
+        }
+    </div>
+}

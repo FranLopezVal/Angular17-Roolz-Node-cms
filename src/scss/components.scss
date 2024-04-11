@@ -4,12 +4,12 @@
 input,
 [type="text"],
 [type="password"] {
-    width: auto;
+    width: 100%;
     padding: 0.5rem;
     margin: 0.5rem 0;
     border: unset;
     background-color: unset;
-    border-bottom: 1px solid $panel-color-dark;
+    border-bottom: 1px solid $border-color;
 
     &.ng-invalid.ng-touched:not(.ng-untouched) {
         border-color: red;
@@ -59,10 +59,16 @@ button.button-glass {
     backdrop-filter: blur(2.7px);
     -webkit-backdrop-filter: blur(2.7px);
     border: 1px solid rgba(255, 255, 255, 0.87);
+    display: flex;
+    padding-inline: $padding-1rem;
+    padding-block: 2px;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
     cursor: pointer;
 
     &:hover {
-        background: linear-gradient(0deg, #27f1ff1e 20%, transparent 90%);
+        background: linear-gradient(0deg, #d100502a 20%, transparent 90%);
         border-radius: $border-radius;
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
         backdrop-filter: blur(2.7px);
@@ -88,5 +94,106 @@ button.button-flat {
     &:hover {
         background-color: $panel-color-2;
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    }
+}
+
+button.button-menu {
+    padding: 2px;
+    background-color: $app-menu-button;
+    border: 1px solid $app-menu-button-border;
+    color: $app-menu-button-color;
+    border-radius: 4px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    min-height: 22px;
+    min-width: 64px;
+    margin: 5px;
+
+    &:hover {
+        background-color: $app-menu-button-hover;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    &:active {
+        background-color: $app-menu-button-border;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    }
+}
+
+.cover-input {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: $panel-color-2;
+    border-radius: 50px;
+    margin: $global-padding;
+    padding-inline: $global-padding * 2;
+}
+
+.separator {
+    width: 100%;
+    height: 1px !important;
+    border-bottom: 1px solid $border-color;
+    margin-block: $global-padding;
+}
+
+
+.node {
+    position: fixed;
+    // top: 100px;
+    // left: 100px;
+    min-width: 150px;
+    min-height: 100px;
+    background-color: $panel-color-dark;
+    border: 1px solid $border-color;
+    border-radius: 4px;
+
+    &>.node-header {
+        background-color: $app-menu-button;
+        color: $app-menu-button-color;
+        padding: 5px;
+        border-radius: 4px 4px 0 0;
+    }
+
+    &>.node-content {
+        width: 100%;
+        height: 100%;
+
+        & .socket {
+            display: flex;
+            flex-direction: row;
+            align-items: baseline;
+
+            & .socket-in {
+                width: 12px;
+                height: 12px;
+                background-color: #ff9090;
+                border-radius: 50%;
+                border: 1px solid darkred;
+            }
+
+            & .socket-data {
+                flex: 1;
+                & input{
+                    width: unset !important;
+                    padding: unset !important;
+                    margin: 0.5rem;
+                }
+            }
+
+            & .socket-out {
+                width: 12px;
+                height: 12px;
+                background-color: green;
+                border-radius: 50%;
+                border: 1px solid darkgreen;
+            }
+        }
     }
 }

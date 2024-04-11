@@ -1,0 +1,1 @@
+export const STORAGE_SESSION_KEY = 'rlz_session_info';
