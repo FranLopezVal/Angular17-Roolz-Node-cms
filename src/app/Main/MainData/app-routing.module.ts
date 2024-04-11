@@ -1,12 +1,22 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+// import { AuthGuard } from './auth.guard';
+import { canActivate, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
+import { containerviewComponent } from '../../Modules/Global/ContainerViews/containerview.component';
 
 const routes: Routes = [
   // { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
-  { 
-    path: 'user', 
-    loadChildren: () => import('../../Modules/User/user.module').then(m => m.UserModule) 
-    // authGuard: [AuthGuard]
+  {
+    path: 'user',
+    loadChildren: () => import('../../Modules/User/user.module').then(m => m.UserModule),
+    canActivate: [canActivate],
+    data: { authGuardPipe: () => redirectUnauthorizedTo(['user/login']) }
+  },
+  {
+    path: 'app',
+    component: containerviewComponent,
+    canActivate: [canActivate],
+    data: { authGuardPipe: () => redirectUnauthorizedTo(['user/login']) }
   },
   // { path: 'faq', loadChildren: () => import('./faq/faq.module').then(m => m.FaqModule) },
   // { path: 'error', loadChildren: () => import('./error/error.module').then(m => m.ErrorModule) },
