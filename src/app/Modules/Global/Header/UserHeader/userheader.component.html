@@ -1,0 +1,20 @@
+@if (UserIsLogged)
+{
+    <div class="userHeader">
+        <span>
+           User: {{ UserName }}
+        </span>
+        <div class="flex-row" style="gap: 8px;">
+            <ui-button-glass (click)="onClick_App()" matTooltip="Go Application">
+                <span class="material-symbols-outlined">
+                    desktop_windows
+                </span>
+            </ui-button-glass>
+            <ui-button-glass (click)="onClick_Logout()" matTooltip="Logout">
+                <span class="material-symbols-outlined">
+                    logout
+                </span>
+            </ui-button-glass>
+        </div>
+    </div>
+}

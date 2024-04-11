@@ -1,0 +1,18 @@
+@if (UserIsLogged)
+{
+    <div class="app-owner">
+        <div class="menu-app">
+            
+            <ui-menubutton #btnnode>Node</ui-menubutton>
+            <ui-menubutton #btnftp>Ftp</ui-menubutton>
+            <ui-menubutton #btndb>Database</ui-menubutton>
+            <ui-menubutton #btnops>Options</ui-menubutton>
+        </div>
+        <div #_container  class="owner">
+            <ng-container #_app>
+
+            </ng-container>
+        </div>
+        <div class="footer">foot</div>
+    </div>
+}

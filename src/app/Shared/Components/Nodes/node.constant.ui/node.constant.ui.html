@@ -1,0 +1,37 @@
+<div class="node-header">
+    Constant
+</div>
+<div (click)="NodeRepaint()" class="node-content">
+
+    <div class="socket">
+        <span>&nbsp; type </span>
+        <div class="socket-data">
+            <select #t_select style="width: unset !important;
+                                           padding: unset !important;
+                                            margin: 0.5rem;">
+                <option value="text">String</option>
+                <option value="number">Number</option>
+                <option value="checkbox">Boolean</option>
+                <option value="date">Date</option>
+                <option value="datetime-local">DT-Local</option>
+                <option value="email">Email</option>
+                <option value="file">File</option>
+                <option value="image">Image</option>
+                <option value="range">Range</option>
+                <option value="time">Time</option>
+            </select>
+        </div>
+    </div>
+
+
+    <div class="socket">
+        <div class="socket-in">   
+        </div>
+        <div class="socket-data">
+            <input #t_input type="{{t_select.value}}">
+
+        </div>
+        <div class="socket-out">
+        </div>
+    </div>
+</div>
