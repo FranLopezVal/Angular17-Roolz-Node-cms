@@ -43,6 +43,11 @@ export abstract class NodePrimigenUI {
     this._position = value;
   }
 
+  public get PositionByStyle(): {X:number, Y:number} {
+    const nativeElement: HTMLElement = this.ref?.nativeElement;
+    return { X: parseInt(nativeElement.style.left, 10), Y: parseInt(nativeElement.style.top, 10) };
+  }
+
   constructor() {
   }
 
@@ -86,6 +91,8 @@ export abstract class NodePrimigenUI {
     this.dragging = false;
   }
 
+  public abstract GetValueExecution(): any;
+
   public abstract NodeRepaint(): boolean;
 
   public abstract NodeUpdate(): boolean;
@@ -97,8 +104,6 @@ export abstract class NodePrimigenUI {
   public abstract NodeSelect(): boolean;
 
   public abstract NodeDeselect(): boolean;
-
-  public abstract GetNodeSocket(id: number): ElementRef | null;
 
 }
 

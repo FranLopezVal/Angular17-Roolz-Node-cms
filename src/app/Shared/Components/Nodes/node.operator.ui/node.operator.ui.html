@@ -1,4 +1,7 @@
 <div class="node-header">
+    <span class="material-symbols-outlined" style="font-size: 12px;">
+        function
+    </span>
     Operator
 </div>
 <div (click)="NodeRepaint()" class="node-content">
@@ -29,17 +32,36 @@
                         display: table;
                         margin: auto;"> Operation: {{t_select.value}} </span>
         </div>
-        <ui-socket #s2 [position]="'right'" [type]="typeNodeA || 'text'" [parentNode]="this">
+        <ui-socket #s3 [position]="'right'" [type]="typeNodeA || 'text'" [parentNode]="this">
         </ui-socket>
     </div>
     <div class="socket">
-        <ui-socket #s3 [position]="'left'" [type]="typeNodeA || 'text'" [parentNode]="this">
-            </ui-socket>
+        <ui-socket #s2 [position]="'left'" [type]="typeNodeA || 'text'" [parentNode]="this">
+        </ui-socket>
         <div class="socket-data">
-           
+    
         </div>
         <!-- <ui-socket [position]="'right'" [type]="typeNodeA || 'text'">
+            </ui-socket> -->
+    </div>
+    <div class="socket">
+        <!-- <ui-socket #s3 [position]="'left'" [type]="typeNodeA || 'text'" [parentNode]="this">
         </ui-socket> -->
+        <div class="socket-data">
+            <div style="display: inline-flex;
+                        align-items: center;
+                        width: 100%;
+                        justify-content: space-around;">
+                <button style="background-color: wheat;
+                                border-radius: 4px;"        
+                (click)="GetValueExecution()">Execute</button>
+                <span style="color: wheat;display: table;margin-inline: 4px;"> 
+                    Result: {{result}} 
+                </span>
+            </div>
+        </div>
+        <!-- <ui-socket [position]="'right'" [type]="typeNodeA || 'text'">
+            </ui-socket> -->
     </div>
 </div>
 

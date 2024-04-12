@@ -139,6 +139,7 @@ body {
 
     &>.owner {
         flex: 1;
+        overflow: auto;
     }
 
     &>.app-footer {

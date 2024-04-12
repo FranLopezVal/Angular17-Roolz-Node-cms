@@ -14,7 +14,7 @@ export class SocketNodeUI implements AfterViewInit{
   @Input() position: 'left' | 'right' = 'left';
 
   @Input() parentNode: NodePrimigenUI | null = null;
-  private currentConnector: ConnectionUI | null = null;
+  public currentConnector: ConnectionUI | null = null;
   
   @ViewChild('_content', { read: ViewContainerRef }) public Content: ViewContainerRef | null = null;
 

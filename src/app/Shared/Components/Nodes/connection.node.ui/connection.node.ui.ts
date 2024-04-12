@@ -14,8 +14,8 @@ export class ConnectionUI  {
 
   // protected _container: containerviewComponent | null = null;
 
-  private nodeA: NodePrimigenUI | null = null; // Is parent
-  private nodeB: NodePrimigenUI | null = null;
+  public nodeA: NodePrimigenUI | null = null; // Is parent
+  public nodeB: NodePrimigenUI | null = null;
 
   public socketA?: SocketNodeUI;
   public socketB?: SocketNodeUI;
@@ -30,9 +30,9 @@ export class ConnectionUI  {
     if (this.nodeA && this.nodeB) {
       
       const as = this.nodeA.Size;
-      const ap = this.nodeA.Position;
+      const ap = this.nodeA.PositionByStyle;
       const bs = this.nodeB.Size;
-      const bp = this.nodeB.Position;
+      const bp = this.nodeB.PositionByStyle;
       
       let x = 0;
       let y = 0;
@@ -131,8 +131,9 @@ export class ConnectionUI  {
 
     const points = [[a.x, a.y - fixtop], [b.x, b.y - fixtop]]; // Puntos inicial y final
 
+    const points_distance = Math.abs((points[0][0] - points[1][0]) / 2);
     // Calcular los puntos de control para la spline
-    const controlPoints = this.calculateControlPoints(points[0], points[1]);
+    const controlPoints = this.calculateControlPointsWithDistance(points[0], points[1], points_distance);
 
     // Dibujar la spline en el SVG
     const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
@@ -177,6 +178,18 @@ export class ConnectionUI  {
     ];
     const controlPoint2 = [
       endPoint[0] - (endPoint[0] - startPoint[0]) / 3,
+      endPoint[1]
+    ];
+    return [controlPoint1, controlPoint2];
+  }
+
+  calculateControlPointsWithDistance(startPoint: number[], endPoint: number[], distance: number): number[][] {
+    const controlPoint1 = [
+      startPoint[0] + distance,
+      startPoint[1]
+    ];
+    const controlPoint2 = [
+      endPoint[0] - distance,
       endPoint[1]
     ];
     return [controlPoint1, controlPoint2];

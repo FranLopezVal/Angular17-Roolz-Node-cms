@@ -1,5 +1,7 @@
 import { AfterViewInit, Component, ComponentRef, ElementRef, Input, Renderer2, ViewChild, inject } from '@angular/core';
 import { NodePrimigenUI } from '../node.primigen.ui/node.primigen.ui';
+import { SocketNodeUI } from '../socket.node.ui/socket.node.ui';
+import { NodeDataTransfer } from '../../../../Core/Models/NodeDataTransfer.model';
 
 @Component({
   selector: 'node-operator',
@@ -9,9 +11,9 @@ export class NodeOperatorUI extends NodePrimigenUI{
 
   @Input() typeNodeA: string = 'text';
 
-  @ViewChild('s1') input1: ElementRef | null = null;
-  @ViewChild('s2') input2: ElementRef | null = null;
-  @ViewChild('s3') output: ElementRef | null = null;
+  @ViewChild('s1') input1: SocketNodeUI | null = null;
+  @ViewChild('s2') input2: SocketNodeUI | null = null;
+  @ViewChild('s3') output: SocketNodeUI | null = null;
 
 
   constructor(private el: ElementRef,
@@ -40,17 +42,18 @@ export class NodeOperatorUI extends NodePrimigenUI{
   public override NodeDeselect(): boolean {
     throw new Error('Method not implemented.');
   }
-  public override GetNodeSocket(id: number): ElementRef | null{
-    if (id === 0) {
-      return this.output;
-    }
-    if (id === 1) {
-      return this.input1;
-    }
-    if (id === 2) {
-      return this.input2;
-    }
-    return null;
+
+  public result: any = null;
+  public override GetValueExecution(): NodeDataTransfer<any> {
+    const ia = this.input1?.currentConnector?.nodeA?.GetValueExecution() || null;
+    const ib = this.input2?.currentConnector?.nodeA?.GetValueExecution() || null;
+    
+    if (ia.value === null || ib.value === null) return new NodeDataTransfer<any>(null);
+    this.result = ia.value + ib.value;
+    
+    this.onMouseUp(new MouseEvent('mouseup')); // simulate mouse up event for redraw connections
+
+    return new NodeDataTransfer<typeof ia.value>(this.result);
   }
 }
 
