@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { roolzPlugin } from "../Common/pluginBase";
-import { databaseBindingPlugin } from "../Common/bases/databaseBindingPlugin";
+import { databaseBindingPlugin } from "../Common/bindings/databaseBindingPlugin";
 import { Auth } from "@angular/fire/auth";
 import { HttpClient } from "@angular/common/http";
 
@@ -22,7 +22,7 @@ export class PluginManager {
     private async loadDefaults(): Promise<void> {
         if (PluginManager.plugins?.length === 0 && PluginManager.state === 'unloaded') {
             PluginManager.state = 'loading';
-            const module = await import('../plugins/firebasePlugin');
+            const module = await import('../Plugins/firebasePlugin');
             try {
                 const args = {
                     http: this.http,

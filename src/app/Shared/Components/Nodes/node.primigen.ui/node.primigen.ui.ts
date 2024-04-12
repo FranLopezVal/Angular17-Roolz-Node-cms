@@ -1,12 +1,14 @@
-import { Component, ComponentRef, ElementRef, OnChanges, SimpleChanges, ViewContainerRef, inject } from '@angular/core';
-import { containerviewComponent } from '../../../../Modules/Global/ContainerViews/containerview.component';
+import { Component, ComponentRef, ElementRef, Output, ViewContainerRef, inject, EventEmitter } from '@angular/core';
+import { containerviewComponent } from '../../../../Modules/NodeViewer/containerview.component';
 
 @Component({
   selector: 'dynamic',
   templateUrl: './node.primigen.ui.html'
 })
 export abstract class NodePrimigenUI {
+
   protected vcr = inject(ViewContainerRef);
+
   public _id: number = -1;
   public _name: string = '';
   protected _description: string = '';
@@ -14,33 +16,31 @@ export abstract class NodePrimigenUI {
   protected _color: string = '';
 
   public Data: any = null;
-
   protected _container: containerviewComponent | null = null;
 
   protected cpm: ComponentRef<any> | null = null;
-  protected ref: ElementRef | null = null;
+  public ref: ElementRef | null = null;
+
+  @Output() EventOnMove: EventEmitter<any> = new EventEmitter<any>();
 
   // Dragging nodes
   private dragging = false;
   private dragStart = { x: 0, y: 0 };
 
   private _position: {X:number, Y:number} = {X: 0, Y: 0};
-  private _size: {W:number, H:number} = {W: 0, H: 0};
+  // private _size: {W:number, H:number} = {W: 0, H: 0};
 
   public get Position(): {X:number, Y:number} {
     return this._position;
   }
 
-  public get Size(): {W:number, H:number} {
-    return this._size;
+  public get Size(): { W: number, H: number } {
+    const bounding = this.ref?.nativeElement.getBoundingClientRect();
+    return { W: bounding?.width || 0, H: bounding?.height || 0};
   }
 
   public set Position(value: {X:number, Y:number}) {
     this._position = value;
-  }
-
-  public set Size(value: {W:number, H:number}) {
-    this._size = value;
   }
 
   constructor() {
@@ -58,7 +58,6 @@ export abstract class NodePrimigenUI {
       // nativeElement.style.position = 'absolute';
       nativeElement.style.left = `${x}px`;
       nativeElement.style.top = `${y}px`;
-    
   }
 
   public onMouseDown(event: MouseEvent): void {
@@ -77,9 +76,13 @@ export abstract class NodePrimigenUI {
     this.MoveTo(this.Position.X + dx, this.Position.Y + dy);
 
     this.dragStart = { x: event.clientX, y: event.clientY };
+
+      this.EventOnMove.emit(event);
   }
 
-  public onMouseUp(): void {
+  public onMouseUp(event: MouseEvent): void {
+
+    this.EventOnMove.emit(event);
     this.dragging = false;
   }
 
@@ -94,6 +97,8 @@ export abstract class NodePrimigenUI {
   public abstract NodeSelect(): boolean;
 
   public abstract NodeDeselect(): boolean;
+
+  public abstract GetNodeSocket(id: number): ElementRef | null;
 
 }
 

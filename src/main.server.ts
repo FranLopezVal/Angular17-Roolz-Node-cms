@@ -1,4 +1,4 @@
-export { AppServerModule as default } from './app/Main/MainData/app.module.server';
+export { AppServerModule as default } from './app/Angular/app.module.server';
 
 
 const valuesMap = new Map()

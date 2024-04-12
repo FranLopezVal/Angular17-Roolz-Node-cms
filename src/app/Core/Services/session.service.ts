@@ -4,7 +4,7 @@ import {
     Auth, UserCredential
 } from '@angular/fire/auth';
 import { PluginManager } from "../PluginManager";
-import { databaseBindingPlugin, databaseFunctions } from "../../Common/bases/databaseBindingPlugin";
+import { databaseBindingPlugin, databaseFunctions } from "../../Common/bindings/databaseBindingPlugin";
 import { STORAGE_SESSION_KEY } from "../Enums/Storage";
 import { Router } from "@angular/router";
 import { on } from "events";

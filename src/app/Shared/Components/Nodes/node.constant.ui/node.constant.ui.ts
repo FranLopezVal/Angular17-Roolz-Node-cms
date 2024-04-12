@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ComponentRef, ElementRef, Renderer2, inject } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NodePrimigenUI } from '../node.primigen.ui/node.primigen.ui';
 
 @Component({
@@ -6,6 +6,8 @@ import { NodePrimigenUI } from '../node.primigen.ui/node.primigen.ui';
   templateUrl: './node.constant.ui.html'
 })
 export class NodeConstantUI extends NodePrimigenUI {
+
+  @ViewChild('s1') output: ElementRef | null = null;
 
   constructor(private el: ElementRef
   ) {
@@ -32,6 +34,13 @@ export class NodeConstantUI extends NodePrimigenUI {
   }
   public override NodeDeselect(): boolean {
     throw new Error('Method not implemented.');
+  }
+
+  public override GetNodeSocket(id: number): ElementRef | null{
+    if (id === 0) {
+      return this.output;
+    }
+    return null;
   }
 }
 

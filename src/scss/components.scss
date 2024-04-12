@@ -153,6 +153,7 @@ button.button-menu {
     background-color: $panel-color-dark;
     border: 1px solid $border-color;
     border-radius: 4px;
+    // z-index: -10;
 
     &>.node-header {
         background-color: $app-menu-button;
@@ -166,16 +167,26 @@ button.button-menu {
         height: 100%;
 
         & .socket {
+            margin-top: 4px;
             display: flex;
             flex-direction: row;
             align-items: baseline;
 
-            & .socket-in {
+            & .socket-sock {
                 width: 12px;
                 height: 12px;
-                background-color: #ff9090;
-                border-radius: 50%;
-                border: 1px solid darkred;
+
+                &:hover {
+                    background-color: #ffe66e;
+                    border: 2px solid #8b6700;
+                }
+
+                &.left {
+                    border-radius: 50% 0px 0px 50%;
+                }
+                &.right {
+                    border-radius: 0px 50% 50% 0px;
+                }
             }
 
             & .socket-data {
@@ -186,14 +197,62 @@ button.button-menu {
                     margin: 0.5rem;
                 }
             }
-
-            & .socket-out {
-                width: 12px;
-                height: 12px;
-                background-color: green;
-                border-radius: 50%;
-                border: 1px solid darkgreen;
-            }
         }
     }
+}
+
+.type-text {
+    background-color: #ff8e6b;
+    border: 2px solid #7c1515;
+}
+
+.type-number {
+    background-color: #5eaa57;
+    border: 2px solid #125f23;
+}
+
+.type-checkbox {
+    background-color: #6bc9ff;
+    border: 2px solid #15397c;
+}
+
+.type-date {
+    background-color: #6bffce;
+    border: 2px solid #156c7c;
+}
+
+.type-datetime-local {
+    background-color: #03ffab;
+    border: 2px solid #156c7c;
+}
+
+.type-email {
+    background-color: #b93b3b;
+    border: 2px solid #7c1515;
+}
+
+.type-file {
+    background-color: #bc6bff;
+    border: 2px solid #7c156e;
+}
+
+.type-image {
+    background-color: #b3ff6b;
+    border: 2px solid #157c51;
+}
+
+.type-range {
+    background-color: #5eaa57;
+    border: 2px solid #125f23;
+}
+
+.type-time {
+    background-color: #03ffab;
+    border: 2px solid #156c7c;
+}
+
+.type-color {
+    background-color: none;
+    background: linear-gradient(0deg, #7c156e, #6bf1ff);
+    border: 2px solid #7c156e;
 }

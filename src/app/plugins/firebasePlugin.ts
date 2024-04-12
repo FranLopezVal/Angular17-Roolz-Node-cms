@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { databaseBindingPlugin, databaseFunctions } from "../Common/bases/databaseBindingPlugin";
+import { databaseBindingPlugin, databaseFunctions } from "../Common/bindings/databaseBindingPlugin";
 import {
     Auth, UserCredential, createUserWithEmailAndPassword,
     signInWithEmailAndPassword,

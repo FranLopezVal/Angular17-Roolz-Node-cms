@@ -1,11 +1,12 @@
 
 import { AfterViewInit, Component, ComponentFactoryResolver, ComponentRef, ElementRef, Inject, OnInit, Renderer2, Type, ViewChild, ViewContainerRef, inject } from '@angular/core';
 import { UserCredential } from 'firebase/auth';
-import { SessionService } from '../../../Core/Services/session.service';
-import { ButtonMenuUI } from '../../../Shared/Components/menubutton.ui/menubutton.ui';
-import { NodeOperatorUI } from '../../../Shared/Components/Nodes/node.operator.ui/node.operator.ui';
-import { NodePrimigenUI } from '../../../Shared/Components/Nodes/node.primigen.ui/node.primigen.ui';
-import { NodeConstantUI } from '../../../Shared/Components/Nodes/node.constant.ui/node.constant.ui';
+import { SessionService } from '../../Core/Services/session.service';
+import { ButtonMenuUI } from '../../Shared/Components/menubutton.ui/menubutton.ui';
+import { NodeOperatorUI } from '../../Shared/Components/Nodes/node.operator.ui/node.operator.ui';
+import { NodePrimigenUI } from '../../Shared/Components/Nodes/node.primigen.ui/node.primigen.ui';
+import { NodeConstantUI } from '../../Shared/Components/Nodes/node.constant.ui/node.constant.ui';
+import { ConnectionUI } from '../../Shared/Components/Nodes/connection.node.ui/connection.node.ui';
 
 @Component({
     selector: 'mod-containerview',
@@ -16,6 +17,8 @@ export class containerviewComponent implements OnInit, AfterViewInit {
 
 
     public static Instance: containerviewComponent;
+
+    public static REAL_TIME_UPDATE_BEZIERS = true;
 
     private _user: UserCredential | null = null;
     @ViewChild('_app', { read: ViewContainerRef }) App: ViewContainerRef | null = null;
@@ -97,7 +100,7 @@ export class containerviewComponent implements OnInit, AfterViewInit {
         });
         this.renderer.listen(compRef.location.nativeElement, 'mouseup', (event) => {
             // if (this.MouseOnCanvas(event)) return;
-            compRef.instance.onMouseUp();
+            compRef.instance.onMouseUp(event);
         });
 
         this.Nodes.add(compRef);

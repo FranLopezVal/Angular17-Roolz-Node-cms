@@ -3,12 +3,14 @@
 </div>
 <div (click)="NodeRepaint()" class="node-content">
 
-    <div class="socket">
-        <span>&nbsp; type </span>
+    <div class="socket" style="color:wheat">
+        <span>&nbsp; Type </span>
         <div class="socket-data">
-            <select #t_select style="width: unset !important;
-                                           padding: unset !important;
-                                            margin: 0.5rem;">
+            <select #t_select name="typeSelector"
+            style= "padding: unset !important;
+                    margin: 0.5rem;
+                    border-radius: 4px;
+                    width: -webkit-fill-available;">
                 <option value="text">String</option>
                 <option value="number">Number</option>
                 <option value="checkbox">Boolean</option>
@@ -19,19 +21,23 @@
                 <option value="image">Image</option>
                 <option value="range">Range</option>
                 <option value="time">Time</option>
+                <option value="color">Color</option>
             </select>
         </div>
     </div>
 
 
     <div class="socket">
-        <div class="socket-in">   
-        </div>
+        <!-- <ui-socket [position]="'left'">
+        </ui-socket> -->
         <div class="socket-data">
-            <input #t_input type="{{t_select.value}}">
-
+            <input style="color:wheat;min-width: 25px;"
+            #t_input type="{{t_select.value}}">
+            @if(t_select.value == 'checkbox'){
+                <span style="color:wheat"> {{t_input.checked}} </span>
+            }
         </div>
-        <div class="socket-out">
-        </div>
+        <ui-socket #s1 [position]="'right'" [type]="t_select.value || 'text'" [parentNode]="this">
+        </ui-socket>
     </div>
 </div>

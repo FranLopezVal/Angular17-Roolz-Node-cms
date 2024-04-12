@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ComponentRef, ElementRef, Renderer2, inject } from '@angular/core';
+import { AfterViewInit, Component, ComponentRef, ElementRef, Input, Renderer2, ViewChild, inject } from '@angular/core';
 import { NodePrimigenUI } from '../node.primigen.ui/node.primigen.ui';
 
 @Component({
@@ -6,6 +6,13 @@ import { NodePrimigenUI } from '../node.primigen.ui/node.primigen.ui';
   templateUrl: './node.operator.ui.html'
 })
 export class NodeOperatorUI extends NodePrimigenUI{
+
+  @Input() typeNodeA: string = 'text';
+
+  @ViewChild('s1') input1: ElementRef | null = null;
+  @ViewChild('s2') input2: ElementRef | null = null;
+  @ViewChild('s3') output: ElementRef | null = null;
+
 
   constructor(private el: ElementRef,
   ) {
@@ -32,6 +39,18 @@ export class NodeOperatorUI extends NodePrimigenUI{
   }
   public override NodeDeselect(): boolean {
     throw new Error('Method not implemented.');
+  }
+  public override GetNodeSocket(id: number): ElementRef | null{
+    if (id === 0) {
+      return this.output;
+    }
+    if (id === 1) {
+      return this.input1;
+    }
+    if (id === 2) {
+      return this.input2;
+    }
+    return null;
   }
 }
 

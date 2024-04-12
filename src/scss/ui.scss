@@ -133,14 +133,19 @@ body {
         flex-direction: row;
         // justify-content: space-between;
         height: 32px;
+        color: $text-color-light;
         background-color: $panel-color-dark;
     }
+
     &>.owner {
-        flex:1;
+        flex: 1;
     }
-    &>.footer {
+
+    &>.app-footer {
         display: flex;
         height: 20px;
+        color: $text-color-light;
+        background-color: $panel-color-dark;
     }
 }
 
@@ -154,14 +159,15 @@ body {
     display: flex;
     flex-direction: column;
     gap: 2px;
+
     & button.button-menu {
         border: unset !important;
         width: 100%;
         margin: unset;
     }
 }
-.backface
-{
+
+.backface {
     position: fixed;
     top: 0;
     right: 0;

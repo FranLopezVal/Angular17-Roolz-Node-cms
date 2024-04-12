@@ -2,6 +2,44 @@
     Operator
 </div>
 <div (click)="NodeRepaint()" class="node-content">
-    
+    <div class="socket" style="color:wheat">
+        <span>&nbsp; Mode </span>
+        <div class="socket-data">
+            <select #t_select name="typeSelector" style="padding: unset !important;
+                        margin: 0.5rem;
+                        border-radius: 4px;
+                        width: -webkit-fill-available;">
+                <option value="+">Sum</option>
+                <option value="-">Sub</option>
+                <option value="*">Multiply</option>
+                <option value="/">Divide</option>
+                <option value="%">Modulus</option>
+                <option value="&&">And</option>
+                <option value="||">Or</option>
+                <option value="==">Equal</option>
+                <option value="!=">NotEqual</option>
+            </select>
+        </div>
+    </div>
+    <div class="socket">
+        <ui-socket [position]="'left'" #s1 [parentNode]="this">
+            </ui-socket>
+        <div class="socket-data">
+            <span style="color: wheat;
+                        display: table;
+                        margin: auto;"> Operation: {{t_select.value}} </span>
+        </div>
+        <ui-socket #s2 [position]="'right'" [type]="typeNodeA || 'text'" [parentNode]="this">
+        </ui-socket>
+    </div>
+    <div class="socket">
+        <ui-socket #s3 [position]="'left'" [type]="typeNodeA || 'text'" [parentNode]="this">
+            </ui-socket>
+        <div class="socket-data">
+           
+        </div>
+        <!-- <ui-socket [position]="'right'" [type]="typeNodeA || 'text'">
+        </ui-socket> -->
+    </div>
 </div>
 
