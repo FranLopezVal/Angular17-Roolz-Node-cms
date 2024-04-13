@@ -9,7 +9,7 @@ import {
 } from '@angular/fire/auth';
 import { roolzPlugin } from "../Common/pluginBase";
 
-export module FirebasePlugin {
+// export module FirebasePlugin { Fix 4 vercel
 
     export class dbFirebase extends roolzPlugin.PluginBase<databaseBindingPlugin> implements databaseFunctions {
         constructor(private args?: any,
@@ -77,4 +77,4 @@ export module FirebasePlugin {
             console.log('Firebase plugin changed');
         }
     }
-}
+// }
