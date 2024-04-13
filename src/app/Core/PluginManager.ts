@@ -3,6 +3,7 @@ import { roolzPlugin } from "../Common/pluginBase";
 import { databaseBindingPlugin } from "../Common/bindings/databaseBindingPlugin";
 import { Auth } from "@angular/fire/auth";
 import { HttpClient } from "@angular/common/http";
+import { FirebasePlugin } from "../Plugins/firebasePlugin";
 
 @Injectable({
     providedIn: 'root',
@@ -23,12 +24,13 @@ export class PluginManager {
         if (PluginManager.plugins?.length === 0 && PluginManager.state === 'unloaded') {
             PluginManager.state = 'loading';
             try {
-            const module = await import('../Plugins/firebasePlugin');
+            // const module = await import('app/Plugins/FirebasePlugin/FirebasePlugin'); //FIX: Fail in vercel
+            const module = FirebasePlugin;
                 const args = {
                     http: this.http,
                     auth: this.auth,
                 };
-                this.registerPlugin(module.FirebasePlugin.dbFirebase, args
+                this.registerPlugin(module.dbFirebase, args
                 );
 
             }
