@@ -22,8 +22,8 @@ export class PluginManager {
     private async loadDefaults(): Promise<void> {
         if (PluginManager.plugins?.length === 0 && PluginManager.state === 'unloaded') {
             PluginManager.state = 'loading';
-            const module = await import('../Plugins/firebasePlugin');
             try {
+            const module = await import('../Plugins/firebasePlugin');
                 const args = {
                     http: this.http,
                     auth: this.auth,
