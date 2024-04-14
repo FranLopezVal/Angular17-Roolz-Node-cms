@@ -15,4 +15,14 @@
         </div>
         <div class="app-footer">foot</div>
     </div>
+} @else {
+    <ui-panel #panel_ [titlePanel]="'Not Logged'" style="position: absolute;
+                                                        transform: translate(-50%,-50%);
+                                                        left: 50%;
+                                                        top: 50%;">
+        <p>
+            You must be logged to access this page.
+        </p>
+        <a routerLink="/user/login">Login</a>
+    </ui-panel>
 }

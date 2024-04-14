@@ -18,7 +18,12 @@ const routes: Routes = [
     canActivate: [canActivate],
     data: { authGuardPipe: () => redirectUnauthorizedTo(['user/login']) }
   },
-  // { path: 'faq', loadChildren: () => import('./faq/faq.module').then(m => m.FaqModule) },
+  {
+    path: '',
+    redirectTo: 'app',
+    pathMatch: 'full'
+  }
+    // { path: 'faq', loadChildren: () => import('./faq/faq.module').then(m => m.FaqModule) },
   // { path: 'error', loadChildren: () => import('./error/error.module').then(m => m.ErrorModule) },
   // { path: 'coming-soon', loadChildren: () => import('./coming-soon/coming-soon.module').then(m => m.ComingSoonModule) },
   // { path: 'maintenance', loadChildren: () => import('./maintenance/maintenance.module').then(m => m.MaintenanceModule) },
