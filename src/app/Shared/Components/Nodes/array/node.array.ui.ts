@@ -89,6 +89,7 @@ export class NodeArrayUI extends NodePrimigenUI {
   }
 
   removeDataset(i: number) {
+    
     this.alldata.removeAt(i);
   }
 

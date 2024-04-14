@@ -27,6 +27,18 @@
                 </span>
                 Options
             </ui-menubutton>
+            <ui-menubutton (click)="SaveNodesStructInFile()">
+                <span class="material-symbols-outlined">
+                    save
+                </span>
+                Save
+            </ui-menubutton>
+            <ui-menubutton (click)="LoadNodesStructFromFile()">
+                <span class="material-symbols-outlined">
+                    folder_open
+                </span>
+                Load
+            </ui-menubutton>
         </div>
         <div #_container  class="owner">
             <ng-container #_app>

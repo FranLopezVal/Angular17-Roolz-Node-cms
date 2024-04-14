@@ -1,0 +1,42 @@
+<div class="node-header">
+    <span class="material-symbols-outlined" style="font-size: 12px;">
+        analytics
+    </span>
+    Data Output 
+
+    <button (click)="DestroySelf()">
+        <span class="material-symbols-outlined">
+            close
+        </span>
+    </button>
+</div>
+<div (click)="NodeRepaint()" class="node-content">
+    <div class="socket" style="margin-left: 8px;">
+        <label [for]="this._id+'_a'">Json Format</label>
+        <input #isJson [id]="this._id+'_a'" type="checkbox" style="width: unset;margin-inline: 8px;" />
+    </div>
+    <div class="socket" style="margin-left: 8px;">
+        <label [for]="this._id+'_b'">Output Console</label>
+        <input #isConsole [id]="this._id+'_b'" type="checkbox" style="width: unset;margin-inline: 8px;" />
+    </div>
+    <div class="socket">
+        <ui-socket #s1 [position]="'left'" [type]="'text'" [parentNode]="this">
+        </ui-socket>
+        <div class="socket-data">
+            <textarea #outarea style="margin-right: 8px;"
+            name="out" id="out" cols="30" rows="10" (change)="NodeRepaint()"></textarea>
+        </div>
+    </div>
+    <div class="socket">
+        <!-- <ui-socket #s3 [position]="'left'" [type]="typeNodeA || 'text'" [parentNode]="this">
+            </ui-socket> -->
+        <div class="socket-buttons">
+            <button (click)="GetValueExecution()">Execute</button>
+            <!-- <span style="color: wheat;display: table;margin-inline: 4px;"> 
+                        Result: {{result}} 
+                    </span> -->
+        </div>
+        <!-- <ui-socket [position]="'right'" [type]="typeNodeA || 'text'">
+                </ui-socket> -->
+    </div>
+</div>

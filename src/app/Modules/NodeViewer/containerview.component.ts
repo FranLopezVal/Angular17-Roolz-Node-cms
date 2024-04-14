@@ -9,6 +9,7 @@ import { NodeConstantUI } from '../../Shared/Components/Nodes/constant/node.cons
 import { ConnectionUI } from '../../Shared/Components/Nodes/behaviours/connection/connection.node.ui';
 import { NodeArrayUI } from '../../Shared/Components/Nodes/array/node.array.ui';
 import { NodeArrayOperatorUI } from '../../Shared/Components/Nodes/ArrayOperator/node.arrayoperator.ui';
+import { NodeConsoleOutputUI } from '../../Shared/Components/Nodes/consoleoutput/node.consoleoutput.ui';
 
 @Component({
     selector: 'mod-containerview',
@@ -69,6 +70,13 @@ export class containerviewComponent implements OnInit, AfterViewInit {
             {
                 id: 1, text: 'Array Operator', icon: 'function', action: () => {
                     this.AddNode(NodeArrayOperatorUI);
+                }, levelChild: 1
+            }
+        );
+        this.btnnode?.AddMenu(
+            {
+                id: 1, text: 'Data Output', icon: 'analytics', action: () => {
+                    this.AddNode(NodeConsoleOutputUI);
                 }, levelChild: 1
             }
         );
@@ -170,6 +178,42 @@ export class containerviewComponent implements OnInit, AfterViewInit {
             this.Container.nativeElement.style.backgroundImage = `linear-gradient(to right, ${color} 1px, ${color2} 1px),
             linear-gradient(to bottom, ${color} 1px, ${color2} 1px)`;
         }
+    }
+
+    public SaveNodesStructInFile() {
+        console.log(JSON.stringify(this.Nodes));
+        const filename = 'nodes.json';
+        const fileData = JSON.stringify(this.Nodes, null, 2);
+        const blob = new Blob([fileData], { type: 'application/json' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        a.click();
+        a.remove();
+    }
+
+    public LoadNodesStructFromFile() {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = '.json';
+        input.onchange = (event) => {
+            const target = event.target as HTMLInputElement;
+            const file = target.files?.item(0);
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const result = e.target?.result as string;
+                    const nodes = JSON.parse(result) as Array<ComponentRef<NodePrimigenUI>>;
+                    nodes.forEach((node) => {
+                        this.Nodes.add(node);
+                    });
+                    this.RefreshView();
+                };
+                reader.readAsText(file);
+            }
+        };
+        input.click();
     }
 
 }

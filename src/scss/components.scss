@@ -160,6 +160,11 @@ button.button-menu {
         color: $app-menu-button-color;
         padding: 5px;
         border-radius: 4px 4px 0 0;
+        &>button {
+            float: right;
+            color: $color-main;
+            margin: -5px;
+        }
     }
 
     &>.node-content {
@@ -170,7 +175,7 @@ button.button-menu {
             margin-top: 4px;
             display: flex;
             flex-direction: row;
-            align-items: baseline;
+            align-items: center;
 
             & .socket-sock {
                 width: 12px;
@@ -184,6 +189,7 @@ button.button-menu {
                 &.left {
                     border-radius: 50% 0px 0px 50%;
                 }
+
                 &.right {
                     border-radius: 0px 50% 50% 0px;
                 }
@@ -191,10 +197,32 @@ button.button-menu {
 
             & .socket-data {
                 flex: 1;
-                & input{
+
+                & input {
                     width: unset !important;
-                    padding: unset !important;
-                    margin: 0.5rem;
+                    padding: .2rem;
+                    margin-left: 6px;
+                    border-radius: 4px;
+                    border: 1px solid gray;
+                    background-color: darkgray;
+                }
+            }
+
+            & .socket-buttons {
+                display: inline-flex;
+                align-items: center;
+                width: 100%;
+                justify-content: flex-start;
+                background-color: $color-main;
+                padding: 0.5rem;
+                gap: $gap;
+
+                &>button {
+                    background-color: wheat;
+                    border-radius: 4px;
+                    height: 40px;
+                    margin: -6px;
+                    padding: 10px;
                 }
             }
         }

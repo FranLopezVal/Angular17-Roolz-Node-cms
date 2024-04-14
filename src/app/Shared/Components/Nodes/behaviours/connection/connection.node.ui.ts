@@ -25,6 +25,7 @@ export class ConnectionUI implements OnDestroy  {
   */
   constructor(private el: ElementRef) {
   }
+  
   ngOnDestroy(): void {
     this.nodeA = null;
     this.nodeB = null;

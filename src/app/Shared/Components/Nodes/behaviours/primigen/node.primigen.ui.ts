@@ -107,6 +107,10 @@ export abstract class NodePrimigenUI {
     }
   }
 
+  public DestroySelf(): void {
+    this.cpm?.destroy();
+  }
+
   public abstract GetValueExecution(): any;
 
   public abstract NodeRepaint(): boolean;

@@ -3,6 +3,11 @@
         data_array
     </span>
     Array
+    <button (click)="DestroySelf()">
+        <span class="material-symbols-outlined">
+            close
+        </span>
+    </button>
 </div>
 <div (click)="NodeRepaint()" class="node-content">
 
@@ -37,10 +42,10 @@
         <div class="socket-data">
             <form [formGroup]="dataForm">
                 <div formArrayName="data">
-                    @for (data of alldata.controls; track $index) {
+                    @for (data of alldata.controls; track data; let i = $index) {
                         <!-- <div *ngFor="let skill of alldata.controls; let i=index"> -->
-                            <div [formGroupName]="$index" style="margin-inline: 8px;">
-                                <span class="font_MONOSPACE">{{$index}}</span>
+                            <div [formGroupName]="i" style="margin-inline: 8px;">
+                                <span class="font_MONOSPACE">{{i}}</span>
                                 @if(t_select.value == 'checkbox'){
                                     <input #t_input type="checkbox" [value]="t_input.checked"
                                     formControlName="data" style="min-width: 25px;">
@@ -48,7 +53,7 @@
                                 } @else {
                                     <input #t_input type="{{t_select.value}}" formControlName="data" style="min-width: 25px;">
                                 }
-                                <button (click)="removeDataset($index)">
+                                <button (click)="removeDataset(i)" style="vertical-align: middle;">
                                     <span class="material-symbols-outlined">
                                         delete
                                     </span>
@@ -62,17 +67,10 @@
         <ui-socket #s1 [position]="'right'" [type]="t_select.value || 'text'" [parentNode]="this">
         </ui-socket>
     </div>
-    <div class="socket-data">
-        <div style="display: inline-flex;
-                            align-items: center;
-                            width: 100%;
-                            justify-content: space-around;">
-            <button style="background-color: wheat;
-                            border-radius: 4px;" (click)="addDataset()">Add</button>
-            <button style="background-color: wheat;
-                            border-radius: 4px;"
-                (click)="GetValueExecution()">Execute</button>
-
+    <div class="socket">
+        <div class="socket-buttons">
+            <button (click)="addDataset()">Add</button>
+            <!-- <button (click)="GetValueExecution()">Execute</button> -->
         </div>
     </div>
 </div>
