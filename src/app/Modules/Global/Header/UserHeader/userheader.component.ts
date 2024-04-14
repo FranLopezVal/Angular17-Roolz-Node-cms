@@ -34,7 +34,7 @@ export class userheaderComponent implements OnInit {
   }
 
   onClick_App() {
-    this.router.navigate(['/App']);
+    this.router.navigate(['/app']);
   }
 }
 

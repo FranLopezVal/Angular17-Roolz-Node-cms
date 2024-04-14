@@ -87,7 +87,7 @@ export class containerviewComponent implements OnInit, AfterViewInit {
 
         const bounds = this.GetBoundingBoxNodes();
         compRef.instance.Position = { X: bounds.R + 200, Y: bounds.Y };
-        compRef.instance.MoveTo(this.GetBoundingBoxNodes().R + 200, this.GetBoundingBoxNodes().Y);
+        compRef.instance.MoveTo(this.GetBoundingBoxNodes().R + 10, this.GetBoundingBoxNodes().Y);
 
         this.renderer.listen(compRef.location.nativeElement, 'mousedown', (event) => {
             // if (this.MouseOnCanvas(event)) return;
@@ -101,6 +101,14 @@ export class containerviewComponent implements OnInit, AfterViewInit {
         this.renderer.listen(compRef.location.nativeElement, 'mouseup', (event) => {
             // if (this.MouseOnCanvas(event)) return;
             compRef.instance.onMouseUp(event);
+        });
+        this.renderer.listen(compRef.location.nativeElement, 'onblur', (event) => {
+            // if (this.MouseOnCanvas(event)) return;
+            compRef.instance.onBlur(event);
+        });
+        this.renderer.listen(compRef.location.nativeElement, 'mouseleave', (event) => {
+            // if (this.MouseOnCanvas(event)) return;
+            compRef.instance.onBlur(event);
         });
 
         this.Nodes.add(compRef);
