@@ -84,7 +84,6 @@ export class NodeOperatorUI extends NodePrimigenUI{
       this.typeNodeOut = 'text';
     }
 
-    this.result = this.result.toString();
     this.onMouseUp(new MouseEvent('mouseup')); // simulate mouse up event for redraw connections
     return new NodeDataTransfer<typeof ia.value>(this.result);
   }
