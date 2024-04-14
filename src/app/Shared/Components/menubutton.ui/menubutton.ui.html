@@ -19,7 +19,12 @@
         {
             <ui-menubutton [_isChild]="true" (click)="onClick()"
             [_menuList]="btn.child" [currentMenu]="btn">
-               <span style="margin-inline: 8px;">{{ btn.text }}</span> 
+               <span style="margin-inline: 8px;">
+                <span class="material-symbols-outlined" style="font-size: 12px;">
+                    {{ btn.icon }}
+                </span>
+                {{ btn.text }}
+            </span> 
             </ui-menubutton>
         }
     </div>

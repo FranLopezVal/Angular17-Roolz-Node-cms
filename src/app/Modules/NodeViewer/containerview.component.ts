@@ -3,10 +3,12 @@ import { AfterViewInit, Component, ComponentFactoryResolver, ComponentRef, Eleme
 import { UserCredential } from 'firebase/auth';
 import { SessionService } from '../../Core/Services/session.service';
 import { ButtonMenuUI } from '../../Shared/Components/menubutton.ui/menubutton.ui';
-import { NodeOperatorUI } from '../../Shared/Components/Nodes/node.operator.ui/node.operator.ui';
-import { NodePrimigenUI } from '../../Shared/Components/Nodes/node.primigen.ui/node.primigen.ui';
-import { NodeConstantUI } from '../../Shared/Components/Nodes/node.constant.ui/node.constant.ui';
-import { ConnectionUI } from '../../Shared/Components/Nodes/connection.node.ui/connection.node.ui';
+import { NodeOperatorUI } from '../../Shared/Components/Nodes/operator/node.operator.ui';
+import { NodePrimigenUI } from '../../Shared/Components/Nodes/behaviours/primigen/node.primigen.ui';
+import { NodeConstantUI } from '../../Shared/Components/Nodes/constant/node.constant.ui';
+import { ConnectionUI } from '../../Shared/Components/Nodes/behaviours/connection/connection.node.ui';
+import { NodeArrayUI } from '../../Shared/Components/Nodes/array/node.array.ui';
+import { NodeArrayOperatorUI } from '../../Shared/Components/Nodes/ArrayOperator/node.arrayoperator.ui';
 
 @Component({
     selector: 'mod-containerview',
@@ -44,25 +46,29 @@ export class containerviewComponent implements OnInit, AfterViewInit {
 
         this.btnnode?.AddMenu(
             {
-                id: 0, text: 'Operator', action: () => {
-                    this.AddNode(NodeOperatorUI);
+                id: 0, text: 'Constant', icon: 'radio_button_unchecked', action: () => {
+                    this.AddNode(NodeConstantUI);
                 }, levelChild: 1
             }
-            // child: [
-            //     { id: 1, text: 'Express', action: () => { console.log('Express'); }, levelChild: 2 },
-            //     // {
-            //     //     id: 2, text: 'NestJS', action: () => { console.log('NestJS'); }, levelChild: 2,
-            //     //     child: [
-            //     //         { id: 1, text: 'Super nest 2000', action: () => { console.log('Super nest 2000'); }, levelChild: 3 },
-            //     //         { id: 2, text: 'No tan super', action: () => { console.log('No tan super'); }, levelChild: 3 },
-            //     //     ]
-            //     // },
-            //     { id: 3, text: 'Socket.io', action: () => { console.log('Socket.io'); }, levelChild: 2 }]
         );
         this.btnnode?.AddMenu(
             {
-                id: 1, text: 'Constant', action: () => {
-                    this.AddNode(NodeConstantUI);
+                id: 0, text: 'Array', icon: 'data_array', action: () => {
+                    this.AddNode(NodeArrayUI);
+                }, levelChild: 1
+            }
+        );
+        this.btnnode?.AddMenu(
+            {
+                id: 1, text: 'Operator', icon: 'function', action: () => {
+                    this.AddNode(NodeOperatorUI);
+                }, levelChild: 1
+            }
+        );
+        this.btnnode?.AddMenu(
+            {
+                id: 1, text: 'Array Operator', icon: 'function', action: () => {
+                    this.AddNode(NodeArrayOperatorUI);
                 }, levelChild: 1
             }
         );
@@ -125,7 +131,7 @@ export class containerviewComponent implements OnInit, AfterViewInit {
     }
 
     public GetBoundingBoxNodes(): { X: number, Y: number, W: number, H: number, R: number, B: number} {
-        const offsetY = 132; // 132 is the height of the menu and header
+        const offsetY = 140; // 132 is the height of the menu and header
         
         let minX = 0;
         let minY = 0;
@@ -168,3 +174,16 @@ export class containerviewComponent implements OnInit, AfterViewInit {
 
 }
 
+
+
+
+/* child: [ // MENU CHILD
+//     { id: 1, text: 'Express', action: () => { console.log('Express'); }, levelChild: 2 },
+//     // {
+//     //     id: 2, text: 'NestJS', action: () => { console.log('NestJS'); }, levelChild: 2,
+//     //     child: [
+//     //         { id: 1, text: 'Super nest 2000', action: () => { console.log('Super nest 2000'); }, levelChild: 3 },
+//     //         { id: 2, text: 'No tan super', action: () => { console.log('No tan super'); }, levelChild: 3 },
+//     //     ]
+//     // },
+//     { id: 3, text: 'Socket.io', action: () => { console.log('Socket.io'); }, levelChild: 2 }] */

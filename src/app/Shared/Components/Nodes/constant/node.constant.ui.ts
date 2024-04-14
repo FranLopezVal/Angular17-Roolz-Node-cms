@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { NodePrimigenUI } from '../node.primigen.ui/node.primigen.ui';
+import { NodePrimigenUI } from '../behaviours/primigen/node.primigen.ui';
 import { NodeDataTransfer } from '../../../../Core/Models/NodeDataTransfer.model';
 
 @Component({
@@ -22,6 +22,7 @@ export class NodeConstantUI extends NodePrimigenUI {
 
   public override NodeRepaint(): boolean {
     this.cpm?.changeDetectorRef.detectChanges();
+    this.onMouseUp(new MouseEvent('mouseup'));
     return true;
   }
   public override NodeUpdate(): boolean {
