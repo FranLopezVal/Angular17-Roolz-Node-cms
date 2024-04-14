@@ -103,7 +103,6 @@ export abstract class NodePrimigenUI {
   public onBlur(event: FocusEvent): void {
     this.EventOnMove.emit(event);
     this.dragging = false;
-
     if (this.ref) {
       this.ref.nativeElement.style.zIndex = this.lastZIndex;
     }

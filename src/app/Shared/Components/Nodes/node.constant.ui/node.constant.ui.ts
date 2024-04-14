@@ -50,7 +50,7 @@ export class NodeConstantUI extends NodePrimigenUI {
       case 'text':
         ndt = new NodeDataTransfer<string>(val);
         break;
-      case 'number':
+      case 'number' || 'range':
         ndt = new NodeDataTransfer<number>(Number(val));
         break;
       case 'checkbox':
