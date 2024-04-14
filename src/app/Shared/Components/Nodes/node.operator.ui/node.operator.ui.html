@@ -17,26 +17,27 @@
                 <option value="*">Multiply</option>
                 <option value="/">Divide</option>
                 <option value="%">Modulus</option>
-                <option value="&&">And</option>
-                <option value="||">Or</option>
+                <option value="&">And</option>
+                <option value="|">Or</option>
+                <option value="^">Pow</option>
                 <option value="==">Equal</option>
-                <option value="!=">NotEqual</option>
+                <option value="!=">Not Equal</option>
             </select>
         </div>
     </div>
     <div class="socket">
-        <ui-socket [position]="'left'" #s1 [parentNode]="this">
+        <ui-socket [position]="'left'" #s1 [type]="typeNodeA || 'text'"  [parentNode]="this"> <!--  INPUT A -->
             </ui-socket>
         <div class="socket-data">
             <span style="color: wheat;
                         display: table;
                         margin: auto;"> Operation: {{t_select.value}} </span>
         </div>
-        <ui-socket #s3 [position]="'right'" [type]="typeNodeA || 'text'" [parentNode]="this">
+        <ui-socket #s3 [position]="'right'" [type]="typeNodeOut || 'text'" [parentNode]="this"><!--  OUTPUT -->
         </ui-socket>
     </div>
     <div class="socket">
-        <ui-socket #s2 [position]="'left'" [type]="typeNodeA || 'text'" [parentNode]="this">
+        <ui-socket #s2 [position]="'left'" [type]="typeNodeB || 'text'" [parentNode]="this"> <!--  INPUT B -->
         </ui-socket>
         <div class="socket-data">
     

@@ -21,6 +21,8 @@ export abstract class NodePrimigenUI {
   protected cpm: ComponentRef<any> | null = null;
   public ref: ElementRef | null = null;
 
+  private lastZIndex = 0;
+
   @Output() EventOnMove: EventEmitter<any> = new EventEmitter<any>();
 
   // Dragging nodes
@@ -68,11 +70,16 @@ export abstract class NodePrimigenUI {
   public onMouseDown(event: MouseEvent): void {
     this.dragging = true;
     this.dragStart = { x: event.clientX, y: event.clientY };
+    this.lastZIndex = this.ref?.nativeElement.style.zIndex || 0;
   }
 
   public onMouseMove(event: MouseEvent): void {
     if (!this.dragging) {
       return;
+    }
+    if (this.ref)
+    {
+      this.ref.nativeElement.style.zIndex = 10;
     }
 
     const dx = event.clientX - this.dragStart.x;
@@ -86,9 +93,20 @@ export abstract class NodePrimigenUI {
   }
 
   public onMouseUp(event: MouseEvent): void {
-
     this.EventOnMove.emit(event);
     this.dragging = false;
+    if (this.ref) {
+      this.ref.nativeElement.style.zIndex = this.lastZIndex;
+    }
+  }
+
+  public onBlur(event: FocusEvent): void {
+    this.EventOnMove.emit(event);
+    this.dragging = false;
+
+    if (this.ref) {
+      this.ref.nativeElement.style.zIndex = this.lastZIndex;
+    }
   }
 
   public abstract GetValueExecution(): any;

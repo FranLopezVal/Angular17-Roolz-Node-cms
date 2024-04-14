@@ -140,6 +140,7 @@ body {
     &>.owner {
         flex: 1;
         overflow: auto;
+        position: relative;
     }
 
     &>.app-footer {

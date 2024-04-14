@@ -75,6 +75,51 @@ export class SessionService implements databaseFunctions {
         });
     }
 
+    LoginGuestUser() {
+        SessionService._session = {
+            user: {
+                uid: "GUEST",
+                email: "guest@roolz.com",
+                emailVerified: false,
+                isAnonymous: true,
+                providerData: [
+                    {
+                        providerId: "password",
+                        uid: "guest@roolz.com",
+                        displayName: null,
+                        email: "guest@roolz.com",
+                        phoneNumber: null,
+                        photoURL: null
+                    }
+                ],
+                stsTokenManager: {
+                    refreshToken: "null",
+                    accessToken: "null",
+                    expirationTime: 1713081475247
+                },
+                createdAt: "1712601525800",
+                lastLoginAt: "1713077872084",
+                apiKey: "",
+                appName: "[DEFAULT]"
+            },
+            providerId: null,
+            _tokenResponse: {
+                kind: "identitytoolkit#VerifyPasswordResponse",
+                localId: "6Or9FPT6K3Tejo3qZI8dOCQMx7u2",
+                email: "guest@roolz.com",
+                displayName: "",
+                idToken: "..-",
+                registered: true,
+                refreshToken: "",
+                expiresIn: "3600"
+            },
+            operationType: "signIn"
+        };
+        this.saveSession();
+        this.EventOnLogin();
+                
+    }
+
     LogoutUser() {
         this.pm.getPluginByName(SessionService._targetPlugin).then((plugin) => {
             return plugin?.LogoutUser()

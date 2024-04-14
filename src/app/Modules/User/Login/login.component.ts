@@ -16,7 +16,6 @@ export class LoginComponent implements OnInit{
 
     constructor(private session: SessionService, private route: Router) {
         session.EventOnLogin = () => {
-            console.log('Login success');
             route.navigate(['/app']);
         }    
         this.Login = new FormGroup({
@@ -36,6 +35,10 @@ export class LoginComponent implements OnInit{
     }
     onClick_LoginGoogle() {
         this.session.LoginUserGoogle();
+    }
+
+    onClick_GuestUser() {
+        this.session.LoginGuestUser();
     }
 
     get UserIsLogged(): boolean {

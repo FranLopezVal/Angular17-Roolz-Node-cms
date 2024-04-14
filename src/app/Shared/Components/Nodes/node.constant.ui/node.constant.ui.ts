@@ -10,6 +10,9 @@ export class NodeConstantUI extends NodePrimigenUI {
 
   @ViewChild('s1') output: ElementRef | null = null;
   @ViewChild('t_input') input: ElementRef<HTMLInputElement> | null = null;
+
+  @ViewChild('t_select') select: ElementRef<HTMLSelectElement> | null = null;
+
   constructor(private el: ElementRef
   ) {
     super();
@@ -40,16 +43,31 @@ export class NodeConstantUI extends NodePrimigenUI {
   public override GetValueExecution(): NodeDataTransfer<any> {
 
     const val = this.input?.nativeElement.value || '';
-
+    const type = this.select?.nativeElement.value || 'text';
     let ndt = new NodeDataTransfer<any>(null);
-    if (val === 'true' || val === 'false') {
-      ndt = new NodeDataTransfer<boolean>(val == 'true');
-    } else if (!isNaN(Number(val))) {
-      ndt = new NodeDataTransfer<number>(Number(val));
-    } else {
-      ndt = new NodeDataTransfer<string>(val);
-    }
 
+    switch (type) {
+      case 'text':
+        ndt = new NodeDataTransfer<string>(val);
+        break;
+      case 'number':
+        ndt = new NodeDataTransfer<number>(Number(val));
+        break;
+      case 'checkbox':
+        const checked = this.input?.nativeElement.checked || false;
+        ndt = new NodeDataTransfer<boolean>(checked);
+        break;
+      default:
+        ndt = new NodeDataTransfer<string>(val);
+        break;
+    }    
+    // if (val === 'true' || val === 'false') {
+    //   ndt = new NodeDataTransfer<boolean>(val == 'true');
+    // } else if (!isNaN(Number(val))) {
+    //   ndt = new NodeDataTransfer<number>(Number(val));
+    // } else {
+    //   ndt = new NodeDataTransfer<string>(val);
+    // }
     return ndt;
   }
 
