@@ -1,0 +1,80 @@
+<div class="node-header">
+    <span class="material-symbols-outlined" style="font-size: 12px;">
+      function
+    </span>
+    Array Operator
+</div>
+<div (change)="onChange_function($event)" class="node-content">
+    <div class="socket" style="color:wheat">
+        <span>&nbsp; Mode </span>
+        <div class="socket-data">
+            <select #t_select name="typeSelector" style="padding: unset !important;
+                        margin: 0.5rem;
+                        border-radius: 4px;
+                        width: -webkit-fill-available;">
+                <option value="Concat">Concat</option>
+                <option value="DeleteAt">Delete At</option>
+                <option value="Reverse">Reverse</option>
+                <option value="Sort">Sort</option>
+                <option value="Filter">Filter</option>
+                <option value="Map">Map</option>
+                <option value="Find">Find</option>
+                <!-- <option value="slice">Slice</option> -->
+                <option value="Shift">Shift</option>
+                <option value="Unshift">Unshift</option>
+                <option value="Fill">Fill</option>
+                <option value="SumAll">Sum all</option>
+                <option value="Average">Average</option>
+                <option value="Min">Min</option>
+                <option value="Max">Max</option>
+                <option value="Count">Count</option>
+                <option value="FindIndex">Find Index</option>
+                <option value="Includes">Includes</option>
+                <option value="ContainsInElement">Contains In</option>
+                <!-- <option value="slice">Slice</option> -->
+                <option value="Every">Every</option>
+                <option value="Join">Join</option>
+            </select>
+        </div>
+    </div>
+    <div class="socket">
+        <ui-socket [position]="'left'" #s1 [type]="typeNodeA || 'text'" [parentNode]="this"> <!--  INPUT A -->
+        </ui-socket>
+        <div class="socket-data">
+            <span style="color: wheat;
+                        display: table;
+                        margin:0 10px;"> Require: {{requireA}} </span>
+        </div>
+        <ui-socket #s3 [position]="'right'" [type]="typeNodeOut || 'text'" [parentNode]="this"><!--  OUTPUT -->
+        </ui-socket>
+    </div>
+    <div class="socket">
+        <ui-socket #s2 [position]="'left'" [type]="typeNodeB || 'text'" [parentNode]="this"> <!--  INPUT B -->
+        </ui-socket>
+        <div class="socket-data">
+            <span style="color: wheat;
+                        display: table;
+                        margin: 0 10px;"> Require: {{requireB}} </span>
+        </div>
+        <!-- <ui-socket [position]="'right'" [type]="'text'">
+            </ui-socket> -->
+    </div>
+    <div class="socket">
+        <!-- <ui-socket #s3 [position]="'left'" [type]="typeNodeA || 'text'" [parentNode]="this">
+        </ui-socket> -->
+        <div class="socket-data">
+            <div style="display: inline-flex;
+                        align-items: center;
+                        width: 100%;
+                        justify-content: space-around;">
+                <button style="background-color: wheat;
+                                border-radius: 4px;" (click)="GetValueExecution()">Execute</button>
+                <span style="color: wheat;display: table;margin-inline: 4px;">
+                    Result: {{result}}
+                </span>
+            </div>
+        </div>
+        <!-- <ui-socket [position]="'right'" [type]="typeNodeA || 'text'">
+            </ui-socket> -->
+    </div>
+</div>

@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ComponentRef, ElementRef, Input, Renderer2, ViewChild, inject } from '@angular/core';
-import { NodePrimigenUI } from '../node.primigen.ui/node.primigen.ui';
-import { SocketNodeUI } from '../socket.node.ui/socket.node.ui';
+import { NodePrimigenUI } from '../behaviours/primigen/node.primigen.ui';
+import { SocketNodeUI } from '../behaviours/socket/socket.node.ui';
 import { NodeDataTransfer } from '../../../../Core/Models/NodeDataTransfer.model';
 
 @Component({

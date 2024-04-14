@@ -1,14 +1,14 @@
-import { Component, ComponentFactoryResolver, ElementRef, ViewChild, ViewContainerRef } from '@angular/core';
-import { containerviewComponent } from '../../../../Modules/NodeViewer/containerview.component';
-import { NodePrimigenUI } from '../node.primigen.ui/node.primigen.ui';
-import { SocketNodeUI } from '../socket.node.ui/socket.node.ui';
+import { Component, ComponentFactoryResolver, ElementRef, OnDestroy, ViewChild, ViewContainerRef } from '@angular/core';
+import { containerviewComponent } from '../../../../../Modules/NodeViewer/containerview.component';
+import { NodePrimigenUI } from '../primigen/node.primigen.ui';
+import { SocketNodeUI } from '../socket/socket.node.ui';
 import { Console } from 'console';
 
 @Component({
   selector: 'dynamic',
   templateUrl: './connection.node.ui.html'
 })
-export class ConnectionUI  {
+export class ConnectionUI implements OnDestroy  {
   
   @ViewChild('svgContainer', { static: true }) svgContainer?: ElementRef<SVGElement>;
 
@@ -17,13 +17,20 @@ export class ConnectionUI  {
   public nodeA: NodePrimigenUI | null = null; // Is parent
   public nodeB: NodePrimigenUI | null = null;
 
-  public socketA?: SocketNodeUI;
-  public socketB?: SocketNodeUI;
+  public socketA: SocketNodeUI | null = null;;
+  public socketB: SocketNodeUI | null = null;;
 
   /* En principio este objeto sera hijo de nodeA, 
     nodeB solo lo reciviremos para saber donde está el socket donde conectar
   */
   constructor(private el: ElementRef) {
+  }
+  ngOnDestroy(): void {
+    this.nodeA = null;
+    this.nodeB = null;
+    this.socketA = null;
+    this.socketB = null;
+    this.svgContainer?.nativeElement.remove();
   }
 
   public getBoundingBoxOfNodes() {
@@ -57,6 +64,8 @@ export class ConnectionUI  {
     }
     return { x: 0, y: 0, w: 0, h: 0 };
   }
+
+
 
 
   public setNodeA(node: NodePrimigenUI, socket: SocketNodeUI) {

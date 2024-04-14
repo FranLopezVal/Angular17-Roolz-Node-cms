@@ -1,0 +1,78 @@
+<div class="node-header">
+    <span class="material-symbols-outlined" style="font-size: 12px;">
+        data_array
+    </span>
+    Array
+</div>
+<div (click)="NodeRepaint()" class="node-content">
+
+    <div class="socket" style="color:wheat">
+        <span>&nbsp; Type </span>
+        <div class="socket-data">
+            <select #t_select name="typeSelector" style="padding: unset !important;
+                    margin: 0.5rem;
+                    border-radius: 4px;
+                    width: -webkit-fill-available;"
+                    (change)="onChange_Type($event)">
+                <option value="text">String</option>
+                <option value="number">Number</option>
+                <option value="checkbox">Boolean</option>
+                <option value="date">Date</option>
+                <option value="datetime-local">DT-Local</option>
+                <option value="email">Email</option>
+                <option value="file">File</option>
+                <option value="image">Image</option>
+                <option value="range">Range</option>
+                <option value="time">Time</option>
+                <option value="color">Color</option>
+            </select>
+        </div>
+    </div>
+
+
+    <div class="socket">
+        <!-- <ui-socket [position]="'left'">
+        </ui-socket> -->
+        <!-- :) -->
+        <div class="socket-data">
+            <form [formGroup]="dataForm">
+                <div formArrayName="data">
+                    @for (data of alldata.controls; track $index) {
+                        <!-- <div *ngFor="let skill of alldata.controls; let i=index"> -->
+                            <div [formGroupName]="$index" style="margin-inline: 8px;">
+                                <span class="font_MONOSPACE">{{$index}}</span>
+                                @if(t_select.value == 'checkbox'){
+                                    <input #t_input type="checkbox" [value]="t_input.checked"
+                                    formControlName="data" style="min-width: 25px;">
+                                <span style="color:wheat"> {{t_input.checked}} </span>
+                                } @else {
+                                    <input #t_input type="{{t_select.value}}" formControlName="data" style="min-width: 25px;">
+                                }
+                                <button (click)="removeDataset($index)">
+                                    <span class="material-symbols-outlined">
+                                        delete
+                                    </span>
+                                </button>
+                            </div>
+                        <!-- </div> -->
+                    }
+                </div>
+            </form>
+        </div>
+        <ui-socket #s1 [position]="'right'" [type]="t_select.value || 'text'" [parentNode]="this">
+        </ui-socket>
+    </div>
+    <div class="socket-data">
+        <div style="display: inline-flex;
+                            align-items: center;
+                            width: 100%;
+                            justify-content: space-around;">
+            <button style="background-color: wheat;
+                            border-radius: 4px;" (click)="addDataset()">Add</button>
+            <button style="background-color: wheat;
+                            border-radius: 4px;"
+                (click)="GetValueExecution()">Execute</button>
+
+        </div>
+    </div>
+</div>

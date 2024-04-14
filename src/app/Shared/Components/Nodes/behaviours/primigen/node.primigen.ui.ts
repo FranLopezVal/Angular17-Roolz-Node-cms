@@ -1,5 +1,5 @@
 import { Component, ComponentRef, ElementRef, Output, ViewContainerRef, inject, EventEmitter } from '@angular/core';
-import { containerviewComponent } from '../../../../Modules/NodeViewer/containerview.component';
+import { containerviewComponent } from '../../../../../Modules/NodeViewer/containerview.component';
 
 @Component({
   selector: 'dynamic',
@@ -15,7 +15,6 @@ export abstract class NodePrimigenUI {
   protected _icon: string = '';
   protected _color: string = '';
 
-  public Data: any = null;
   protected _container: containerviewComponent | null = null;
 
   protected cpm: ComponentRef<any> | null = null;

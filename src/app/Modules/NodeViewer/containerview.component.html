@@ -3,10 +3,30 @@
     <div class="app-owner">
         <div class="menu-app">
             
-            <ui-menubutton #btnnode>Node</ui-menubutton>
-            <ui-menubutton #btnftp>Ftp</ui-menubutton>
-            <ui-menubutton #btndb>Database</ui-menubutton>
-            <ui-menubutton #btnops>Options</ui-menubutton>
+            <ui-menubutton #btnnode>
+                <span class="material-symbols-outlined">
+                    web_asset
+                </span>
+                Basics Nodes
+            </ui-menubutton>
+            <ui-menubutton #btnftp>
+                <span class="material-symbols-outlined">
+                    flowsheet
+                </span>
+                Ftp Nodes
+            </ui-menubutton>
+            <ui-menubutton #btndb>
+                <span class="material-symbols-outlined">
+                    database
+                </span>
+                Database Nodes
+            </ui-menubutton>
+            <ui-menubutton #btnops>
+                <span class="material-symbols-outlined">
+                    settings_applications
+                </span>
+                Options
+            </ui-menubutton>
         </div>
         <div #_container  class="owner">
             <ng-container #_app>
