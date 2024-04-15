@@ -1,5 +1,8 @@
 import { Component, ComponentRef, ElementRef, Output, ViewContainerRef, inject, EventEmitter } from '@angular/core';
 import { containerviewComponent } from '../../../../../Modules/NodeViewer/containerview.component';
+import { SettingsNodes } from '../../../../../Core/Models/SettingsNodes.model';
+import { Observable } from 'rxjs';
+import { NodeDataTransfer } from '../../../../../Core/Models/NodeDataTransfer.model';
 
 @Component({
   selector: 'dynamic',
@@ -14,12 +17,12 @@ export abstract class NodePrimigenUI {
   protected _description: string = '';
   protected _icon: string = '';
   protected _color: string = '';
+  protected settings: SettingsNodes | null = null;
 
   protected _container: containerviewComponent | null = null;
 
   protected cpm: ComponentRef<any> | null = null;
   public ref: ElementRef | null = null;
-
   private lastZIndex = 0;
 
   @Output() EventOnMove: EventEmitter<any> = new EventEmitter<any>();
@@ -31,6 +34,8 @@ export abstract class NodePrimigenUI {
   private _position: {X:number, Y:number} = {X: 0, Y: 0};
   // private _size: {W:number, H:number} = {W: 0, H: 0};
 
+
+  //#region Getters and Setters
   public get Position(): {X:number, Y:number} {
     return this._position;
   }
@@ -48,6 +53,11 @@ export abstract class NodePrimigenUI {
     const nativeElement: HTMLElement = this.ref?.nativeElement;
     return { X: parseInt(nativeElement.style.left, 10), Y: parseInt(nativeElement.style.top, 10) };
   }
+
+  public set Settings(value: SettingsNodes | null) {
+    this.settings = value;
+  }
+  //#endregion
 
   constructor() {
   }
@@ -87,7 +97,7 @@ export abstract class NodePrimigenUI {
     this.MoveTo(this.Position.X + dx, this.Position.Y + dy);
 
     this.dragStart = { x: event.clientX, y: event.clientY };
-
+    if (this.settings?.viewRefreshRealtime)
       this.EventOnMove.emit(event);
   }
 
@@ -111,7 +121,8 @@ export abstract class NodePrimigenUI {
     this.cpm?.destroy();
   }
 
-  public abstract GetValueExecution(): any;
+  //@ts-ignore
+  public abstract GetValueExecution(): Promise<NodeDataTransfer<any>>;
 
   public abstract NodeRepaint(): boolean;
 

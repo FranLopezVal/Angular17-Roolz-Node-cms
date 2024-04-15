@@ -1,0 +1,89 @@
+<div class="node-header">
+    <span class="material-symbols-outlined" style="font-size: 12px;">
+        cloud_download
+    </span>
+    Fetch
+    <button (click)="DestroySelf()">
+        <span class="material-symbols-outlined">
+            close
+        </span>
+    </button>
+</div>
+<div (click)="NodeRepaint()" class="node-content">
+    <div class="socket" style="color:wheat">
+        <span>&nbsp; Method </span>
+        <div class="socket-data">
+            <select #t_method name="typeSelector" style="padding: unset !important;
+                            margin: 0.5rem;
+                            border-radius: 4px;
+                            width: -webkit-fill-available;">
+                <option value="GET">GET</option>
+                <option value="POST">POST</option>
+                <option value="PUT">PUT</option>
+                <option value="PATCH">PATCH</option>
+                <option value="HEAD">HEAD</option>
+                <option value="DELETE">DELETE</option>
+                <option value="CONNECT">CONNECT</option>
+                <option value="OPTIONS">OPTIONS</option>
+                <option value="TRACE">TRACE</option>
+            </select>
+        </div>
+    </div>
+    <div class="socket" style="color:wheat">
+        <span>&nbsp; Cache </span>
+        <div class="socket-data">
+            <select #t_cache name="typeSelector" style="padding: unset !important;
+                                margin-inline: 0.5rem;margin-bottom: 0.5rem;
+                                border-radius: 4px;
+                                width: -webkit-fill-available;">
+                <option value="no-cache">No cache</option>
+                <option value="reload">Reload</option>
+                <option value="force-cache">Force Cache</option>
+            </select>
+        </div>
+    </div>
+    <div class="socket" style="color:wheat">
+        <span>&nbsp; Mode </span>
+        <div class="socket-data">
+            <select #t_mode name="typeSelector" style="padding: unset !important;
+                                margin-inline: 0.5rem;margin-bottom: 0.5rem;
+                                border-radius: 4px;
+                                width: -webkit-fill-available;">
+                <option value="no-cache">Cors</option>
+                <option value="no-cors">No Cors</option>
+                <option value="same-origin">Same Origin</option>
+            </select>
+        </div>
+    </div>
+    <div class="socket">
+        <ui-socket [position]="'left'" #s1 [type]="typeNodeA || 'text'" [parentNode]="this"> <!--  INPUT A -->
+        </ui-socket>
+        <div class="socket-data" style="display: flex;justify-content: space-between;min-width: 280px;">
+            <span style="color: wheat;margin-inline: 8px;"> URL</span>
+            <span style="color: wheat;margin-inline: 8px;"> Output Data</span>
+        </div>
+        <ui-socket #s3 [position]="'right'" [type]="typeNodeOut || 'text'" [parentNode]="this"><!--  OUTPUT -->
+        </ui-socket>
+    </div>
+    <div class="socket">
+        <ui-socket #s2 [position]="'left'" [type]="typeNodeB || 'text'" [parentNode]="this"> <!--  INPUT B -->
+        </ui-socket>
+        <div class="socket-data">
+            <span style="color: wheat;margin-inline: 8px;" matTooltip="text"> HTTP Params *</span>
+        </div>
+        <!-- <ui-socket [position]="'right'" [type]="typeNodeA || 'text'">
+            </ui-socket> -->
+    </div>
+    <div class="socket">
+        <!-- <ui-socket #s3 [position]="'left'" [type]="typeNodeA || 'text'" [parentNode]="this">
+        </ui-socket> -->
+        <div class="socket-buttons">
+            <button (click)="GetValueExecution()">Execute</button>
+            <!-- <span style="color: wheat;display: table;margin-inline: 4px;"> 
+                    Result: {{result}} 
+                </span> -->
+        </div>
+        <!-- <ui-socket [position]="'right'" [type]="typeNodeA || 'text'">
+            </ui-socket> -->
+    </div>
+</div>

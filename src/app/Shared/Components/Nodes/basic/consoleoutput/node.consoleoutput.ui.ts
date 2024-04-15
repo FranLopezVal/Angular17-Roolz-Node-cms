@@ -1,7 +1,8 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { NodePrimigenUI } from '../behaviours/primigen/node.primigen.ui';
-import { NodeDataTransfer } from '../../../../Core/Models/NodeDataTransfer.model';
-import { SocketNodeUI } from '../behaviours/socket/socket.node.ui';
+import { NodePrimigenUI } from '../../behaviours/primigen/node.primigen.ui';
+import { NodeDataTransfer } from '../../../../../Core/Models/NodeDataTransfer.model';
+import { SocketNodeUI } from '../../behaviours/socket/socket.node.ui';
+import { containerviewComponent } from '../../../../../Modules/NodeViewer/containerview.component';
 
 @Component({
   selector: 'node-consoleoutput',
@@ -44,12 +45,16 @@ export class NodeConsoleOutputUI extends NodePrimigenUI {
     throw new Error('Method not implemented.');
   }
 
-  public override GetValueExecution(): NodeDataTransfer<any> {
+  public async GetValueExecution(): Promise<NodeDataTransfer<any>> {
+
+    containerviewComponent.Instance?.InitExecutionTimer();
 
     const ndt = new NodeDataTransfer<any>(null);
-    const ia = this.input1?.currentConnector?.nodeA?.GetValueExecution().value || null;
+    let ia;
+    await this.input1?.currentConnector?.nodeA?.GetValueExecution().then((data) => ia = data.value);
 
     if (!ia) {
+      containerviewComponent.Instance?.EndExecutionTimer();
       return ndt;
     }
     if (this.isJson?.nativeElement.checked && this.IsJsonObject(ia)) {
@@ -65,10 +70,12 @@ export class NodeConsoleOutputUI extends NodePrimigenUI {
     if (this.outArea?.nativeElement) {
     this.outArea.nativeElement.value = ia;
     }
+    containerviewComponent.Instance?.EndExecutionTimer();
     return ndt;
   }
 
-  private IsJsonObject(obj : any) {
+  private IsJsonObject(obj: any) {
+    containerviewComponent.Instance?.EndExecutionTimer();
     return typeof obj === 'object' && obj !== null;
   }
 

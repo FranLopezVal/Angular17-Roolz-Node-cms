@@ -93,6 +93,8 @@ export class SocketNodeUI implements AfterViewInit, OnDestroy {
   removeConnection(): void {
 
     if (this.currentConnector !== null) {// remove connection data and angular component
+
+      this.currentConnector.socketB?.refConnector?.destroy();
       this.currentConnector.socketA?.refConnector?.destroy();
       this.Content?.clear();
       this.currentConnector = null;

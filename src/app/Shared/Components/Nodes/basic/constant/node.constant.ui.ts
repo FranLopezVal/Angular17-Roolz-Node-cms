@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { NodePrimigenUI } from '../behaviours/primigen/node.primigen.ui';
-import { NodeDataTransfer } from '../../../../Core/Models/NodeDataTransfer.model';
+import { NodePrimigenUI } from '../../behaviours/primigen/node.primigen.ui';
+import { NodeDataTransfer } from '../../../../../Core/Models/NodeDataTransfer.model';
 
 @Component({
   selector: 'node-operator',
@@ -41,7 +41,8 @@ export class NodeConstantUI extends NodePrimigenUI {
     throw new Error('Method not implemented.');
   }
 
-  public override GetValueExecution(): NodeDataTransfer<any> {
+  //@ts-ignore
+  public async GetValueExecution(): Promise<NodeDataTransfer<any>> {
 
     const val = this.input?.nativeElement.value || '';
     const type = this.select?.nativeElement.value || 'text';

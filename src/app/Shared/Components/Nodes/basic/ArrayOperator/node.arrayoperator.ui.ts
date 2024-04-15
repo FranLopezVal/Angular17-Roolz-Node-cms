@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ComponentRef, ElementRef, Input, Renderer2, ViewChild, inject } from '@angular/core';
-import { NodePrimigenUI } from '../behaviours/primigen/node.primigen.ui';
-import { SocketNodeUI } from '../behaviours/socket/socket.node.ui';
-import { NodeDataTransfer } from '../../../../Core/Models/NodeDataTransfer.model';
+import { NodePrimigenUI } from '../../behaviours/primigen/node.primigen.ui';
+import { SocketNodeUI } from '../../behaviours/socket/socket.node.ui';
+import { NodeDataTransfer } from '../../../../../Core/Models/NodeDataTransfer.model';
 
 @Component({
   selector: 'node-arrayoperator',
@@ -185,9 +185,11 @@ export class NodeArrayOperatorUI extends NodePrimigenUI {
 
   public result: any = null;
 
-  public override GetValueExecution(): NodeDataTransfer<any> {
-    const ia = this.input1?.currentConnector?.nodeA?.GetValueExecution().value || null;
-    const ib = this.input2?.currentConnector?.nodeA?.GetValueExecution().value || null;
+  public async GetValueExecution(): Promise<NodeDataTransfer<any>> {
+    let ia;
+    let ib;
+    await this.input1?.currentConnector?.nodeA?.GetValueExecution().then((data) => ia = data.value);
+    await this.input2?.currentConnector?.nodeA?.GetValueExecution().then((data) => ib = data.value);
 
     const ndt = new NodeDataTransfer<any>(null);
     if (ia === null) {
@@ -246,7 +248,7 @@ export class NodeArrayOperatorUI extends NodePrimigenUI {
     } else {
       switch (this.select?.nativeElement.value) {
         case 'Concat':
-          this.result = this.Concat(ia, ib);
+          this.result = this.Concat(ia, ib!);
           break;
         case 'Reverse':
           this.result = this.Reverse(ia);
