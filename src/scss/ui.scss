@@ -137,10 +137,16 @@ body {
         background-color: $panel-color-dark;
     }
 
-    &>.owner {
+    &>.view-container {
         flex: 1;
         overflow: auto;
         position: relative;
+
+        &>.node-container {
+            width: 10000px;
+            height: 10000px;
+            position: absolute;
+        }
     }
 
     &>.app-footer {

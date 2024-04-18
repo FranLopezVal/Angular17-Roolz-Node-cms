@@ -9,11 +9,11 @@
                 </span>
                 Basics Nodes
             </ui-menubutton>
-            <ui-menubutton #btnftp>
+            <ui-menubutton #btncom>
                 <span class="material-symbols-outlined">
                     flowsheet
                 </span>
-                Ftp Nodes
+                Comunication Nodes
             </ui-menubutton>
             <ui-menubutton #btndb>
                 <span class="material-symbols-outlined">
@@ -21,19 +21,32 @@
                 </span>
                 Database Nodes
             </ui-menubutton>
-            <ui-menubutton #btnops>
+            <button class="button-menu">
                 <span class="material-symbols-outlined">
                     settings_applications
                 </span>
                 Options
-            </ui-menubutton>
+            </button>
+            <button class="button-menu" (click)="SaveNodesStructInFile()">
+                <span class="material-symbols-outlined">
+                    save
+                </span>
+                Save
+            </button>
+            <button class="button-menu" (click)="LoadNodesStructFromFile()">
+                <span class="material-symbols-outlined">
+                    folder_open
+                </span>
+                Load
+            </button>
         </div>
-        <div #_container  class="owner">
-            <ng-container #_app>
-
+        <div  class="view-container">
+        <div #_container class="node-container">
+            <ng-container #_app> <!-- Render Zone -->
             </ng-container>
         </div>
-        <div class="app-footer">foot</div>
+        </div>
+        <div class="app-footer">Last Execution Time: {{ExecutionTime}} ms</div>
     </div>
 } @else {
     <ui-panel #panel_ [titlePanel]="'Not Logged'" style="position: absolute;

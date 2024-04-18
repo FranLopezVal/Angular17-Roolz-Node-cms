@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { NodePrimigenUI } from '../behaviours/primigen/node.primigen.ui';
-import { NodeDataTransfer } from '../../../../Core/Models/NodeDataTransfer.model';
+import { NodePrimigenUI } from '../../behaviours/primigen/node.primigen.ui';
+import { NodeDataTransfer } from '../../../../../Core/Models/NodeDataTransfer.model';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
@@ -89,11 +89,12 @@ export class NodeArrayUI extends NodePrimigenUI {
   }
 
   removeDataset(i: number) {
+    
     this.alldata.removeAt(i);
   }
 
 
-  public override GetValueExecution(): NodeDataTransfer<any> {
+  public async GetValueExecution(): Promise<NodeDataTransfer<any>> {
 
     let ndt = new NodeDataTransfer<any>(null);
 

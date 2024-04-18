@@ -3,12 +3,15 @@ import { AfterViewInit, Component, ComponentFactoryResolver, ComponentRef, Eleme
 import { UserCredential } from 'firebase/auth';
 import { SessionService } from '../../Core/Services/session.service';
 import { ButtonMenuUI } from '../../Shared/Components/menubutton.ui/menubutton.ui';
-import { NodeOperatorUI } from '../../Shared/Components/Nodes/operator/node.operator.ui';
+import { NodeOperatorUI } from '../../Shared/Components/Nodes/basic/operator/node.operator.ui';
 import { NodePrimigenUI } from '../../Shared/Components/Nodes/behaviours/primigen/node.primigen.ui';
-import { NodeConstantUI } from '../../Shared/Components/Nodes/constant/node.constant.ui';
+import { NodeConstantUI } from '../../Shared/Components/Nodes/basic/constant/node.constant.ui';
 import { ConnectionUI } from '../../Shared/Components/Nodes/behaviours/connection/connection.node.ui';
-import { NodeArrayUI } from '../../Shared/Components/Nodes/array/node.array.ui';
-import { NodeArrayOperatorUI } from '../../Shared/Components/Nodes/ArrayOperator/node.arrayoperator.ui';
+import { NodeArrayUI } from '../../Shared/Components/Nodes/basic/array/node.array.ui';
+import { NodeArrayOperatorUI } from '../../Shared/Components/Nodes/basic/ArrayOperator/node.arrayoperator.ui';
+import { NodeConsoleOutputUI } from '../../Shared/Components/Nodes/basic/consoleoutput/node.consoleoutput.ui';
+import { SettingsNodes } from '../../Core/Models/SettingsNodes.model';
+import { NodeFetchUI } from '../../Shared/Components/Nodes/comm/node.fetch.ui';
 
 @Component({
     selector: 'mod-containerview',
@@ -27,11 +30,21 @@ export class containerviewComponent implements OnInit, AfterViewInit {
     @ViewChild('_container') Container: ElementRef | null = null;
 
     @ViewChild('btnnode') btnnode?: ButtonMenuUI;
-    @ViewChild('btnftp') btnftp?: ButtonMenuUI;
+    @ViewChild('btncom') btncom?: ButtonMenuUI;
     @ViewChild('btndb') btndb?: ButtonMenuUI;
     @ViewChild('btnops') btnops?: ButtonMenuUI;
 
     Nodes: Set<ComponentRef<NodePrimigenUI>> = new Set<ComponentRef<NodePrimigenUI>>();
+
+    private _lastExecutionInit: Date | null = null;
+    private _lastExecutionEnd: Date | null = null;
+    private _executionTime: number = 0;
+
+    private settings: SettingsNodes = { viewRefreshRealtime: false };
+
+    public get ExecutionTime(): number {
+        return this._executionTime;
+    }
 
     constructor(private session: SessionService,
         private renderer: Renderer2,
@@ -53,22 +66,37 @@ export class containerviewComponent implements OnInit, AfterViewInit {
         );
         this.btnnode?.AddMenu(
             {
-                id: 0, text: 'Array', icon: 'data_array', action: () => {
+                id: 1, text: 'Array', icon: 'data_array', action: () => {
                     this.AddNode(NodeArrayUI);
                 }, levelChild: 1
             }
         );
         this.btnnode?.AddMenu(
             {
-                id: 1, text: 'Operator', icon: 'function', action: () => {
+                id: 2, text: 'Operator', icon: 'function', action: () => {
                     this.AddNode(NodeOperatorUI);
                 }, levelChild: 1
             }
         );
         this.btnnode?.AddMenu(
             {
-                id: 1, text: 'Array Operator', icon: 'function', action: () => {
+                id: 3, text: 'Array Operator', icon: 'function', action: () => {
                     this.AddNode(NodeArrayOperatorUI);
+                }, levelChild: 1
+            }
+        );
+        this.btnnode?.AddMenu(
+            {
+                id: 4, text: 'Data Output', icon: 'analytics', action: () => {
+                    this.AddNode(NodeConsoleOutputUI);
+                }, levelChild: 1
+            }
+        );
+        
+        this.btnnode?.AddMenu(
+            {
+                id: 5, text: 'Fetch', icon: 'cloud_download', action: () => {
+                    this.AddNode(NodeFetchUI);
                 }, levelChild: 1
             }
         );
@@ -83,6 +111,12 @@ export class containerviewComponent implements OnInit, AfterViewInit {
         return this.session.userIsLogged();
     }
 
+    public ResetSettingsAllNodes() { //Call when settings change
+        this.Nodes.forEach((node) => {
+            node.instance.Settings = this.settings;
+        });
+    }
+
     public AddNode<T extends NodePrimigenUI>(node: Type<T>)
     {
         if(this.App == null) return;
@@ -90,6 +124,7 @@ export class containerviewComponent implements OnInit, AfterViewInit {
         compRef.instance._name = `Node>${this.Nodes.size}`;
         compRef.instance._id = this.Nodes.size;
         compRef.instance.SetRef(compRef);
+        compRef.instance.Settings = this.settings;
 
         const bounds = this.GetBoundingBoxNodes();
         compRef.instance.Position = { X: bounds.R + 200, Y: bounds.Y };
@@ -170,6 +205,53 @@ export class containerviewComponent implements OnInit, AfterViewInit {
             this.Container.nativeElement.style.backgroundImage = `linear-gradient(to right, ${color} 1px, ${color2} 1px),
             linear-gradient(to bottom, ${color} 1px, ${color2} 1px)`;
         }
+    }
+
+    public InitExecutionTimer() {
+        this._executionTime = 0;
+        this._lastExecutionInit = new Date();
+    }
+
+    public EndExecutionTimer() {
+        this._lastExecutionEnd = new Date();
+        this._executionTime = this._lastExecutionEnd.getTime() - this._lastExecutionInit!.getTime();
+        console.log(`Execution time: ${this._executionTime}ms`);
+    }
+
+    public SaveNodesStructInFile() { //TODO: FIX IT
+        console.log(JSON.stringify(this.Nodes));
+        const filename = 'nodes.json';
+        const fileData = JSON.stringify(this.Nodes, null, 2);
+        const blob = new Blob([fileData], { type: 'application/json' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        a.click();
+        a.remove();
+    }
+
+    public LoadNodesStructFromFile() {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = '.json';
+        input.onchange = (event) => {
+            const target = event.target as HTMLInputElement;
+            const file = target.files?.item(0);
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const result = e.target?.result as string;
+                    const nodes = JSON.parse(result) as Array<ComponentRef<NodePrimigenUI>>;
+                    nodes.forEach((node) => {
+                        this.Nodes.add(node);
+                    });
+                    this.RefreshView();
+                };
+                reader.readAsText(file);
+            }
+        };
+        input.click();
     }
 
 }

@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ComponentRef, ElementRef, Input, Type, ViewChild, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ComponentRef, ElementRef, Input, OnDestroy, Type, ViewChild, ViewContainerRef } from '@angular/core';
 import { ConnectionUI } from '../connection/connection.node.ui';
 import { NodePrimigenUI } from '../primigen/node.primigen.ui';
 
@@ -6,7 +6,7 @@ import { NodePrimigenUI } from '../primigen/node.primigen.ui';
   selector: 'ui-socket',
   templateUrl: './socket.node.ui.html'
 })
-export class SocketNodeUI implements AfterViewInit {
+export class SocketNodeUI implements AfterViewInit, OnDestroy {
 
   private static TemplateConnector: ConnectionUI | null = null;
 
@@ -85,9 +85,16 @@ export class SocketNodeUI implements AfterViewInit {
     }
   }
 
+  ngOnDestroy(): void {
+    this.removeConnection();
+  }
+
+
   removeConnection(): void {
 
     if (this.currentConnector !== null) {// remove connection data and angular component
+
+      this.currentConnector.socketB?.refConnector?.destroy();
       this.currentConnector.socketA?.refConnector?.destroy();
       this.Content?.clear();
       this.currentConnector = null;

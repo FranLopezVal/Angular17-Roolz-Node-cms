@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ComponentRef, ElementRef, Input, Renderer2, ViewChild, inject } from '@angular/core';
-import { NodePrimigenUI } from '../behaviours/primigen/node.primigen.ui';
-import { SocketNodeUI } from '../behaviours/socket/socket.node.ui';
-import { NodeDataTransfer } from '../../../../Core/Models/NodeDataTransfer.model';
+import { NodePrimigenUI } from '../../behaviours/primigen/node.primigen.ui';
+import { SocketNodeUI } from '../../behaviours/socket/socket.node.ui';
+import { NodeDataTransfer } from '../../../../../Core/Models/NodeDataTransfer.model';
 
 @Component({
   selector: 'node-operator',
@@ -47,9 +47,11 @@ export class NodeOperatorUI extends NodePrimigenUI{
   }
 
   public result: any = null;
-  public override GetValueExecution(): NodeDataTransfer<any> {
-    const ia = this.input1?.currentConnector?.nodeA?.GetValueExecution() || null;
-    const ib = this.input2?.currentConnector?.nodeA?.GetValueExecution() || null;
+  public async GetValueExecution(): Promise<NodeDataTransfer<any>> {
+    let ia;
+    let ib;
+    await this.input1?.currentConnector?.nodeA?.GetValueExecution().then((data) => ia = data.value);
+    await this.input2?.currentConnector?.nodeA?.GetValueExecution().then((data) => ib = data.value);
 
     const typeA = this.input1?.currentConnector?.socketA?.type || 'text';
     const typeB = this.input2?.currentConnector?.socketA?.type || 'text';
@@ -63,17 +65,17 @@ export class NodeOperatorUI extends NodePrimigenUI{
     //   this.typeNodeOut = 'text';
     // }    
 
-    if (ia.value === null || ib.value === null) return new NodeDataTransfer<any>(null);
+    if (ia! === null || ib! === null) return new NodeDataTransfer<any>(null);
  
-    if (typeof ia.value === 'number' && typeof ib.value === 'number') {
-      this.result = this.operateNumber(ia.value, ib.value) as number;
-    } else if (typeof ia.value === 'boolean' && typeof ib.value === 'boolean') {
-      this.result = this.operateBoolean(ia.value, ib.value) as boolean;
-    } else if (typeof ia.value === 'boolean' && typeof ib.value === 'number' || typeof ia.value === 'number' && typeof ib.value === 'boolean') {
-      this.result = this.operateBoolean(!!ia.value, !!ib.value) as boolean;
+    if (typeof ia === 'number' && typeof ib === 'number') {
+      this.result = this.operateNumber(ia, ib) as number;
+    } else if (typeof ia === 'boolean' && typeof ib === 'boolean') {
+      this.result = this.operateBoolean(ia, ib) as boolean;
+    } else if (typeof ia === 'boolean' && typeof ib === 'number' || typeof ia === 'number' && typeof ib === 'boolean') {
+      this.result = this.operateBoolean(!!ia, !!ib) as boolean;
     }
     else {
-      this.result = this.operateString(ia.value, ib.value) as string;
+      this.result = this.operateString(ia, ib) as string;
     }
 
     if (typeof this.result === 'boolean') {
@@ -85,7 +87,7 @@ export class NodeOperatorUI extends NodePrimigenUI{
     }
 
     this.onMouseUp(new MouseEvent('mouseup')); // simulate mouse up event for redraw connections
-    return new NodeDataTransfer<typeof ia.value>(this.result);
+    return new NodeDataTransfer<typeof ia>(this.result);
   }
 
   public operateBoolean(a: boolean, b: boolean): boolean {

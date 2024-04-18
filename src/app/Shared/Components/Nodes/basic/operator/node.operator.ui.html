@@ -3,6 +3,11 @@
         function
     </span>
     Operator
+    <button (click)="DestroySelf()">
+        <span class="material-symbols-outlined">
+            close
+        </span>
+    </button>
 </div>
 <div (click)="NodeRepaint()" class="node-content">
     <div class="socket" style="color:wheat">
@@ -48,18 +53,11 @@
     <div class="socket">
         <!-- <ui-socket #s3 [position]="'left'" [type]="typeNodeA || 'text'" [parentNode]="this">
         </ui-socket> -->
-        <div class="socket-data">
-            <div style="display: inline-flex;
-                        align-items: center;
-                        width: 100%;
-                        justify-content: space-around;">
-                <button style="background-color: wheat;
-                                border-radius: 4px;"        
-                (click)="GetValueExecution()">Execute</button>
-                <span style="color: wheat;display: table;margin-inline: 4px;"> 
+        <div class="socket-buttons">
+                <button (click)="GetValueExecution()">Execute</button>
+                <!-- <span style="color: wheat;display: table;margin-inline: 4px;"> 
                     Result: {{result}} 
-                </span>
-            </div>
+                </span> -->
         </div>
         <!-- <ui-socket [position]="'right'" [type]="typeNodeA || 'text'">
             </ui-socket> -->
