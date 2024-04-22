@@ -11,7 +11,8 @@ import { NodeArrayUI } from '../../Shared/Components/Nodes/basic/array/node.arra
 import { NodeArrayOperatorUI } from '../../Shared/Components/Nodes/basic/ArrayOperator/node.arrayoperator.ui';
 import { NodeConsoleOutputUI } from '../../Shared/Components/Nodes/basic/consoleoutput/node.consoleoutput.ui';
 import { SettingsNodes } from '../../Core/Models/SettingsNodes.model';
-import { NodeFetchUI } from '../../Shared/Components/Nodes/comm/node.fetch.ui';
+import { NodeFetchUI } from '../../Shared/Components/Nodes/comm/fetch/node.fetch.ui';
+import { NodeSerialhUI } from '../../Shared/Components/Nodes/comm/serial/node.serial.ui';
 
 @Component({
     selector: 'mod-containerview',
@@ -92,11 +93,19 @@ export class containerviewComponent implements OnInit, AfterViewInit {
                 }, levelChild: 1
             }
         );
-        
-        this.btnnode?.AddMenu(
+
+
+        this.btncom?.AddMenu(
             {
                 id: 5, text: 'Fetch', icon: 'cloud_download', action: () => {
                     this.AddNode(NodeFetchUI);
+                }, levelChild: 1
+            }
+        );
+        this.btncom?.AddMenu(
+            {
+                id: 5, text: 'Serial Port', icon: 'cable', action: () => {
+                    this.AddNode(NodeSerialhUI);
                 }, levelChild: 1
             }
         );

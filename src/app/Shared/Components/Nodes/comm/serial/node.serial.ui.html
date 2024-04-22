@@ -1,0 +1,117 @@
+<div class="node-header">
+    <span class="material-symbols-outlined" style="font-size: 12px;">
+        cable
+    </span>
+    Serial Port
+    <button (click)="DestroySelf()">
+        <span class="material-symbols-outlined">
+            close
+        </span>
+    </button>
+</div>
+<div (click)="NodeRepaint()" class="node-content">
+    <div class="socket" style="color:wheat">
+        <span>&nbsp; Port </span>
+        <div class="socket-data">
+            <select #t_port name="typeSelector" style="padding: unset !important;
+                                margin: 0.5rem;
+                                border-radius: 4px;
+                                width: -webkit-fill-available;">
+                                @for (item of getPorts(); track $index) {
+                                    <option [value]="item">{{item}}</option>
+                                }
+                
+                <!-- <option value="250000">250000</option>
+                                <option value="500000">500000</option> -->
+    
+            </select>
+        </div>
+    </div>
+    <div class="socket" style="color:wheat">
+        <span>&nbsp; Baud Rate </span>
+        <div class="socket-data">
+            <select #t_baudrate name="typeSelector" style="padding: unset !important;
+                                margin: 0.5rem;
+                                border-radius: 4px;
+                                width: -webkit-fill-available;">
+                <option value="9600">9600</option>
+                <option value="19200">19200</option>
+                <option value="38400">38400</option>
+                <option value="57600">57600</option>
+                <option value="74880">74880</option>
+                <option value="115200">115200</option>
+                <option value="230400">230400</option>
+                <!-- <option value="250000">250000</option>
+                                <option value="500000">500000</option> -->
+    
+            </select>
+        </div>
+    </div>
+    <div class="socket" style="color:wheat">
+        <span>&nbsp; Parity </span>
+        <div class="socket-data">
+            <select #t_parity name="typeSelector" style="padding: unset !important;
+                                margin-inline: 0.5rem;margin-bottom: 0.5rem;
+                                border-radius: 4px;
+                                width: -webkit-fill-available;">
+                <option value="none">None</option>
+                
+            </select>
+        </div>
+    </div>
+    <div class="socket" style="color:wheat">
+        <span>&nbsp; Stop bit </span>
+        <div class="socket-data">
+            <select #t_stopbit name="typeSelector" style="padding: unset !important;
+                                    margin-inline: 0.5rem;margin-bottom: 0.5rem;
+                                    border-radius: 4px;
+                                    width: -webkit-fill-available;">
+                <option value="one">One</option>
+    
+            </select>
+        </div>
+    </div>
+    <div class="socket" style="color:wheat">
+        <span>&nbsp; Handshake </span>
+        <div class="socket-data">
+            <select #t_handshake name="typeSelector" style="padding: unset !important;
+                                    margin-inline: 0.5rem;margin-bottom: 0.5rem;
+                                    border-radius: 4px;
+                                    width: -webkit-fill-available;">
+                <option value="none">none</option>
+    
+            </select>
+        </div>
+    </div>
+    <div class="socket">
+        <ui-socket [position]="'left'" #s1 [type]="typeNodeA || 'text'" [parentNode]="this"> <!--  INPUT A -->
+        </ui-socket>
+        <div class="socket-data" style="display: flex;justify-content: space-between;min-width: 280px;">
+            <span style="color: wheat;margin-inline: 8px;"> URL</span>
+            <span style="color: wheat;margin-inline: 8px;"> Output Data</span>
+        </div>
+        <ui-socket #s3 [position]="'right'" [type]="typeNodeOut || 'text'" [parentNode]="this"><!--  OUTPUT -->
+        </ui-socket>
+    </div>
+    <div class="socket">
+        <ui-socket #s2 [position]="'left'" [type]="typeNodeB || 'text'" [parentNode]="this"> <!--  INPUT B -->
+        </ui-socket>
+        <div class="socket-data">
+            <span style="color: wheat;margin-inline: 8px;" matTooltip="text"> HTTP Params *</span>
+        </div>
+        <!-- <ui-socket [position]="'right'" [type]="typeNodeA || 'text'">
+            </ui-socket> -->
+    </div>
+    <div class="socket">
+        <!-- <ui-socket #s3 [position]="'left'" [type]="typeNodeA || 'text'" [parentNode]="this">
+        </ui-socket> -->
+        <div class="socket-buttons">
+            <button (click)="GetValueExecution()">Execute</button>
+            <!-- <span style="color: wheat;display: table;margin-inline: 4px;"> 
+                    Result: {{result}} 
+                </span> -->
+        </div>
+        <!-- <ui-socket [position]="'right'" [type]="typeNodeA || 'text'">
+            </ui-socket> -->
+    </div>
+</div>

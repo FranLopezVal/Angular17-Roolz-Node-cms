@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input, ViewChild, inject } from '@angular/core';
-import { NodePrimigenUI } from '../behaviours/primigen/node.primigen.ui';
-import { SocketNodeUI } from '../behaviours/socket/socket.node.ui';
-import { NodeDataTransfer } from '../../../../Core/Models/NodeDataTransfer.model';
+import { NodePrimigenUI } from '../../behaviours/primigen/node.primigen.ui';
+import { SocketNodeUI } from '../../behaviours/socket/socket.node.ui';
+import { NodeDataTransfer } from '../../../../../Core/Models/NodeDataTransfer.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject, takeUntil } from 'rxjs';
 
@@ -106,7 +106,7 @@ export class NodeFetchUI extends NodePrimigenUI {
                 observe: 'body',
                 responseType: 'json',
             }
-        ).toPromise();
+        )
     }
 
 }
