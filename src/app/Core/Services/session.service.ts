@@ -1,13 +1,22 @@
-import { Injectable, OnInit } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+/**
+ * CopyRight (C) 2024 Francisco Lopez
+ * Proyecto de Git: https://github.com/FranLopezVal
+ * Creado como parte de portafolio de Francisco.
+ * 
+ * Si usas este código por favor respeta los derechos de autor. (da crédito al autor :D)
+ * Este proyecto es de uso libre para fines educativos.
+ * 
+ * Os quiero mucho.
+ */
+
+import { Injectable } from "@angular/core";
 import {
-    Auth, UserCredential
+    UserCredential
 } from '@angular/fire/auth';
 import { PluginManager } from "../PluginManager";
-import { databaseBindingPlugin, databaseFunctions } from "../../Common/bindings/databaseBindingPlugin";
+import { databaseFunctions } from "../../Common/bindings/databaseBindingPlugin";
 import { STORAGE_SESSION_KEY } from "../Enums/Storage";
 import { Router } from "@angular/router";
-import { on } from "events";
 
 
 @Injectable({
