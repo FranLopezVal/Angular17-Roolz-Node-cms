@@ -3,6 +3,17 @@ import {A11yModule} from '@angular/cdk/a11y';
 import {ClipboardModule} from '@angular/cdk/clipboard';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {PortalModule} from '@angular/cdk/portal';
+/**
+ * CopyRight (C) 2024 Francisco Lopez
+ * Proyecto de Git: https://github.com/FranLopezVal
+ * Creado como parte de portafolio de Francisco.
+ * 
+ * Si usas este código por favor respeta los derechos de autor. (da crédito al autor :D)
+ * Este proyecto es de uso libre para fines educativos.
+ * 
+ * Os quiero mucho.
+ */
+
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {CdkStepperModule} from '@angular/cdk/stepper';
 import {CdkTableModule} from '@angular/cdk/table';

@@ -1,9 +1,19 @@
+/**
+ * CopyRight (C) 2024 Francisco Lopez
+ * Proyecto de Git: https://github.com/FranLopezVal
+ * Creado como parte de portafolio de Francisco.
+ * 
+ * Si usas este código por favor respeta los derechos de autor. (da crédito al autor :D)
+ * Este proyecto es de uso libre para fines educativos.
+ * 
+ * Os quiero mucho.
+ */
+
 import { Component, ElementRef, Input, ViewChild, inject } from '@angular/core';
 import { NodePrimigenUI } from '../../behaviours/primigen/node.primigen.ui';
 import { SocketNodeUI } from '../../behaviours/socket/socket.node.ui';
 import { NodeDataTransfer } from '../../../../../Core/Models/NodeDataTransfer.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, Subject, takeUntil } from 'rxjs';
 
 
 @Component({
@@ -74,7 +84,6 @@ export class NodeFetchUI extends NodePrimigenUI {
         if (method === 'GET') {
             await this.abstractFetch(URL, headers).then(
                 (data: any) => {
-                    console.log(data);
                     this.result = data;
                 }
             ).catch((error: any) => {

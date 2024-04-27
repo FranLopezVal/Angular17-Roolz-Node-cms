@@ -1,6 +1,16 @@
+/**
+ * CopyRight (C) 2024 Francisco Lopez
+ * Proyecto de Git: https://github.com/FranLopezVal
+ * Creado como parte de portafolio de Francisco.
+ * 
+ * Si usas este código por favor respeta los derechos de autor. (da crédito al autor :D)
+ * Este proyecto es de uso libre para fines educativos.
+ * 
+ * Os quiero mucho.
+ */
+
 import { Directive } from "@angular/core";
-import { AfterContentInit } from "@angular/core";
-import { AbstractControl, ControlContainer, FormGroup, NgForm } from "@angular/forms";
+import { AbstractControl, FormGroup, NgForm } from "@angular/forms";
 
 
 declare module "@angular/forms" {
