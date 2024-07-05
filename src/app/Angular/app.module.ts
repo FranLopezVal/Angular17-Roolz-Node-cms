@@ -37,9 +37,6 @@ import { containerviewComponent } from '../Modules/NodeViewer/containerview.comp
     //FIREBASE
 
     provideFirebaseApp(() => initializeApp(Environments.firebase)),
-    // AngularFireDatabaseModule,
-    // AngularFireStorageModule,
-    // AngularFireAuthModule,
     provideAuth(() => getAuth())
 
   ],
